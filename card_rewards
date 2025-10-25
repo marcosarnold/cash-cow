@@ -1,0 +1,539 @@
+{
+  "metadata": {
+    "timestamp": "2025-10-25T22:42:13.743Z",
+    "executionTimeMs": 34263,
+    "cardsRequested": 13,
+    "cardsProcessed": 13,
+    "totalToolCallsCount": 36,
+    "parallelExecution": true
+  },
+  "offers": [
+    {
+      "cardName": "Capital One Savor Student Cash Rewards Credit Card",
+      "card_name": "Capital One Savor Student Cash Rewards Credit Card",
+      "issuing_bank": "Capital One",
+      "sign_up_bonus": {
+        "details": "Earn a $50 cash bonus if you spend at least $100 within 3 months of account opening.",
+        "conditions": "Bonus will be applied to your rewards balance within two billing cycles. Existing or previous accountholders may not be eligible."
+      },
+      "annual_fee": "$0",
+      "apr": {
+        "variable_rate": "26.99%",
+        "introductory_apr": "None"
+      },
+      "rewards_program": {
+        "cash_back_percentages": {
+          "grocery_stores": "3%",
+          "dining": "3%",
+          "entertainment": "3%",
+          "streaming_services": "3%",
+          "other_purchases": "1%"
+        },
+        "special_offers": {
+          "capital_one_entertainment": "8% cash back on eligible purchases made through Capital One Entertainment."
+        }
+      },
+      "balance_transfer_offers": {
+        "details": "Balance transfers are not specifically mentioned; check with Capital One for current offers."
+      },
+      "foreign_transaction_fees": "$0",
+      "credit_score_requirements": "Fair to Good",
+      "key_benefits_and_perks": [
+        "No annual fee",
+        "Unlimited 3% cash back on dining, entertainment, and popular streaming services",
+        "Access to Capital One Travel with special features",
+        "Price drop protection on travel bookings",
+        "Flexible cancellation options for travel",
+        "CreditWise® for credit score monitoring"
+      ]
+    },
+    {
+      "cardName": "U.S. Bank Shield Visa Card",
+      "card_name": "U.S. Bank Shield Visa Card",
+      "issuing_bank": "U.S. Bank National Association",
+      "sign_up_bonus_details": {
+        "annual_statement_credit": "$20 after 11 consecutive months of purchases"
+      },
+      "annual_fee": "$0",
+      "apr": {
+        "introductory_apr": "0% for the first 24 billing cycles on purchases and balance transfers",
+        "post_introductory_apr": "Variable APR after the introductory period"
+      },
+      "rewards_program_details": {
+        "cash_back_percentage": "4% on prepaid air, hotel, and car reservations booked directly in the Travel Center",
+        "flexible_redemption": "Cash back can be redeemed as a statement credit, direct deposit to a U.S. Bank account, or as a rewards card"
+      },
+      "special_offers_or_promotions": {
+        "introductory_offer": "0% APR for 24 billing cycles on purchases and balance transfers",
+        "extendpay_plan": "Opportunity to set up a 3-month $0 ExtendPay Plan each calendar year after the introductory offer expires"
+      },
+      "balance_transfer_offers": {
+        "balance_transfer_fee": "5% of each transfer amount, $5 minimum"
+      },
+      "introductory_apr_periods": {
+        "duration": "24 billing cycles"
+      },
+      "foreign_transaction_fees": "$0",
+      "credit_score_requirements": "Good to excellent credit score",
+      "key_benefits_and_perks": [
+        "Cell phone protection up to $600 for theft or damage when monthly bill is paid with the card",
+        "Auto rental collision damage waiver",
+        "Extended warranty protection for qualifying purchases",
+        "Purchase security for theft or damage within the first 90 days of purchase",
+        "Free credit score access through U.S. Bank online and mobile banking"
+      ]
+    },
+    {
+      "cardName": "Capital One Venture Rewards Credit Card",
+      "card_name": "Capital One Venture Rewards Credit Card",
+      "issuing_bank": "Capital One",
+      "sign_up_bonus": {
+        "bonus_miles": 75000,
+        "spending_requirement": 4000,
+        "time_frame": "3 months"
+      },
+      "annual_fee": 95,
+      "apr": {
+        "purchase_rate": "19.99% - 28.99% variable APR"
+      },
+      "rewards_program": {
+        "base_rewards": "2X miles on every purchase",
+        "bonus_rewards": "5X miles on hotels, vacation rentals, and rental cars booked through Capital One Travel"
+      },
+      "cash_back_percentages": null,
+      "special_offers": {
+        "no_foreign_transaction_fees": true,
+        "global_entry_tsa_precheck_credit": {
+          "amount": 120,
+          "conditions": "Credit for Global Entry or TSA PreCheck application fee"
+        }
+      },
+      "balance_transfer_offers": {
+        "balance_transfer": "Available, subject to approval"
+      },
+      "introductory_apr_periods": null,
+      "foreign_transaction_fees": 0,
+      "credit_score_requirements": "Excellent credit",
+      "key_benefits": [
+        "Unlimited 2X miles on every purchase",
+        "75,000 bonus miles after spending $4,000 in the first 3 months",
+        "5X miles on travel booked through Capital One Travel",
+        "Flexible redemption options for travel, cash back, gift cards, and more",
+        "Access to Capital One Travel for booking and price drop protection",
+        "Complimentary Hertz Five Star status for car rentals",
+        "24-hour travel assistance services"
+      ]
+    },
+    {
+      "cardName": "Discover it Cash Back - 18 Month Intro Balance Transfer Offer",
+      "card_name": "Discover it® Cash Back",
+      "issuing_bank": "Discover",
+      "sign_up_bonus_details": {
+        "cashback_match": "Discover will automatically match all the cash back you earn at the end of your first year after you open your new Discover it® cash back card."
+      },
+      "annual_fee": "None",
+      "apr": {
+        "introductory_apr": "0% for 15 months on purchases and balance transfers",
+        "standard_apr": "17.99% to 26.99% variable"
+      },
+      "rewards_program_details": {
+        "cash_back_percentages": {
+          "5%": "On everyday purchases at different places you shop each quarter (like grocery stores, restaurants, gas stations, etc.) up to the quarterly maximum when you activate.",
+          "1%": "On all other purchases."
+        },
+        "cash_back_expiration": "Cash back won't expire for the life of the account."
+      },
+      "special_offers_or_promotions": {
+        "cashback_match": "No limit to how much Discover will match."
+      },
+      "balance_transfer_offers": {
+        "introductory_balance_transfer_fee": "3% until January 10, 2026",
+        "standard_balance_transfer_fee": "Up to 5% for future balance transfers"
+      },
+      "introductory_apr_periods": {
+        "balance_transfer_apr": "0% for 15 months"
+      },
+      "foreign_transaction_fees": "None",
+      "credit_score_requirements": "Good to excellent credit (typically a score of 700 or higher is recommended).",
+      "key_benefits_and_perks": [
+        "No annual fee",
+        "Free Social Security number alerts",
+        "$0 Fraud Liability Guarantee",
+        "99% nationwide acceptance",
+        "Ability to freeze your account via mobile app"
+      ]
+    },
+    {
+      "cardName": "American Express Platinum Card",
+      "card_name": "American Express Platinum Card",
+      "issuing_bank": "American Express",
+      "sign_up_bonus_details": {
+        "bonus_points": "Up to 175,000 Membership Rewards points",
+        "spending_requirement": "$8,000 in eligible purchases within the first 6 months"
+      },
+      "annual_fee": "$895",
+      "apr": {
+        "variable_rate": "20.24% - 27.24% based on creditworthiness"
+      },
+      "rewards_program_details": {
+        "points_per_dollar": {
+          "flights": "5 points per dollar on flights booked directly with airlines or through American Express Travel (up to $500,000 per calendar year)",
+          "hotels": "5 points per dollar on prepaid hotels booked through American Express",
+          "other_travel": "2 points per dollar on other eligible travel expenses booked through American Express",
+          "other_purchases": "1 point per dollar on all other purchases"
+        }
+      },
+      "cash_back_percentages": "N/A (points-based rewards)",
+      "special_offers_or_promotions": [
+        {
+          "offer": "Up to $200 in annual credit for airline incidental fees",
+          "details": "Choose one qualifying airline to receive up to $200 in statement credits for incidental fees."
+        },
+        {
+          "offer": "$200 in Uber Cash",
+          "details": "Receive up to $15 in Uber Cash monthly for rides and food delivery."
+        },
+        {
+          "offer": "$120 Uber One credit",
+          "details": "Receive up to $120 in credits for an Uber One membership."
+        },
+        {
+          "offer": "$600 in hotel credits",
+          "details": "$300 credit semi-annually on prepaid bookings at Fine Hotels + Resorts."
+        },
+        {
+          "offer": "$400 Resy dining credit",
+          "details": "Get up to $100 in statement credits each quarter for eligible purchases with Resy."
+        }
+      ],
+      "balance_transfer_offers": "N/A",
+      "introductory_apr_periods": "N/A",
+      "foreign_transaction_fees": "None",
+      "credit_score_requirements": "Good to Excellent (typically 700+)",
+      "key_benefits_and_perks": [
+        "Access to the American Express Global Lounge Collection",
+        "Concierge service available 24/7",
+        "Travel insurance benefits including trip cancellation and interruption insurance",
+        "Cell phone protection",
+        "Purchase protection and return protection",
+        "Extended warranty on eligible purchases",
+        "Access to exclusive events and experiences"
+      ]
+    },
+    {
+      "cardName": "Wells Fargo Reflect Card",
+      "card_name": "Wells Fargo Reflect Card",
+      "issuing_bank": "Wells Fargo",
+      "sign_up_bonus_details": "No sign-up bonus available.",
+      "annual_fee": "$0",
+      "apr": {
+        "introductory_apr": "0% for 21 months from account opening on purchases and qualifying balance transfers",
+        "standard_apr": "17.99%, 24.49% or 28.74% variable APR thereafter"
+      },
+      "rewards_program_details": {
+        "cash_back_percentages": "No cash back rewards program",
+        "special_offers_or_promotions": "Access to personalized deals through My Wells Fargo Deals"
+      },
+      "balance_transfer_offers": {
+        "balance_transfer_fee": "Typically applies, refer to Important Credit Terms for details",
+        "introductory_balance_transfer_apr": "0% for 21 months on qualifying balance transfers made within 120 days from account opening"
+      },
+      "foreign_transaction_fees": "3% for each transaction amount converted to U.S. dollars",
+      "credit_score_requirements": "Good to excellent credit recommended",
+      "key_benefits_and_perks": [
+        "Cellular Telephone Protection: Up to $600 against damage or theft with a $25 deductible",
+        "Roadside Dispatch: 24/7 roadside assistance available",
+        "Zero Liability Protection: No responsibility for unauthorized transactions if reported promptly",
+        "Credit Close-Up: Monthly FICO® Score updates and personalized credit insights"
+      ]
+    },
+    {
+      "cardName": "Citi Simplicity Card",
+      "card_name": "Citi Simplicity Card",
+      "issuing_bank": "Citi",
+      "sign_up_bonus_details": "No sign-up bonus available.",
+      "annual_fee": "None",
+      "apr": {
+        "introductory_apr": {
+          "purchases": "0% for 21 months",
+          "balance_transfers": "0% for 21 months"
+        },
+        "post_introductory_apr": "Variable APR of 16.24% - 26.24%, based on creditworthiness"
+      },
+      "rewards_program_details": "No rewards program available.",
+      "cash_back_percentages": "N/A",
+      "special_offers_or_promotions": "No late fees, no penalty rate.",
+      "balance_transfer_offers": {
+        "introductory_fee": "3% of each transfer ($5 minimum) for transfers completed within the first 4 months",
+        "post_introductory_fee": "5% of each transfer ($5 minimum)"
+      },
+      "introductory_apr_periods": {
+        "purchases": "0% for 21 months from date of account opening",
+        "balance_transfers": "0% for 21 months from date of account opening"
+      },
+      "foreign_transaction_fees": "3% of each purchase in U.S. dollars",
+      "credit_score_requirements": "Good to excellent credit (typically 700+)",
+      "key_benefits_and_perks": [
+        "No annual fee",
+        "No late fees",
+        "No penalty rate",
+        "$0 liability on unauthorized charges",
+        "24/7 customer service",
+        "Flexible payment due date",
+        "Contactless payment options"
+      ]
+    },
+    {
+      "cardName": "Capital One Venture X Rewards Credit Card",
+      "card_name": "Capital One Venture X Rewards Credit Card",
+      "issuing_bank": "Capital One",
+      "sign_up_bonus": {
+        "miles": 75000,
+        "spending_requirement": "$4,000 in the first 3 months"
+      },
+      "annual_fee": "$395",
+      "apr": {
+        "variable_rate": "19.99% - 28.99%"
+      },
+      "rewards_program": {
+        "general_rewards": "2X miles on every purchase",
+        "travel_rewards": {
+          "hotels_and_rental_cars": "10X miles when booked through Capital One Travel",
+          "flights_and_vacation_rentals": "5X miles when booked through Capital One Travel"
+        },
+        "anniversary_bonus": {
+          "miles": 10000,
+          "description": "Earned every year on the account anniversary"
+        }
+      },
+      "cash_back_percentages": "N/A",
+      "special_offers": {
+        "travel_credit": "$300 annual credit for purchases made through Capital One Travel",
+        "complimentary_prior_subscription": "Access to exclusive travel experiences and destination guides",
+        "discounted_membership": "50% off The Cultivist membership for up to 2 years"
+      },
+      "balance_transfer_offers": "N/A",
+      "introductory_apr_periods": "N/A",
+      "foreign_transaction_fees": "None",
+      "credit_score_requirements": "Excellent credit required",
+      "key_benefits_and_perks": [
+        "Access to Capital One Lounges and 1,300+ Priority Pass lounges worldwide",
+        "Global Entry or TSA PreCheck reimbursement up to $120",
+        "Hertz President's Circle status for car rentals",
+        "Cellphone protection for eligible purchases",
+        "Trip cancellation and interruption coverage",
+        "Return protection for qualifying purchases",
+        "Extended warranty protection on eligible items",
+        "Travel accident insurance",
+        "Auto rental collision damage waiver"
+      ]
+    },
+    {
+      "cardName": "Blue Cash Preferred Card from American Express",
+      "card_name": "Blue Cash Preferred Card",
+      "issuing_bank": "American Express",
+      "sign_up_bonus": {
+        "details": "Earn a $300 statement credit after you spend $3,000 in purchases on your new Card within the first 6 months.",
+        "amount": 300,
+        "spending_requirement": 3000,
+        "time_frame": "6 months"
+      },
+      "annual_fee": 95,
+      "apr": {
+        "variable_rate": "15.99% to 26.99%",
+        "introductory_apr": {
+          "duration": "0% for the first 12 months",
+          "applicable_to": "balance transfers"
+        }
+      },
+      "rewards_program": {
+        "cash_back_percentages": {
+          "supermarkets": "6% cash back at U.S. supermarkets on up to $6,000 per year in purchases, then 1%",
+          "streaming_services": "6% cash back on select U.S. streaming subscriptions",
+          "gas_stations": "3% cash back on U.S. gas stations",
+          "transit": "3% cash back on transit including taxis/rideshare, parking, tolls, trains, and buses",
+          "other_purchases": "1% on other purchases"
+        },
+        "special_offers": "Access to Amex Offers for additional cash back opportunities.",
+        "balance_transfer_offers": "0% introductory APR on balance transfers for the first 12 months."
+      },
+      "foreign_transaction_fees": "2.7%",
+      "credit_score_requirements": "Good to Excellent (typically 700+)",
+      "key_benefits_and_perks": [
+        "No foreign transaction fees",
+        "Purchase protection",
+        "Extended warranty",
+        "Access to exclusive events and experiences",
+        "Fraud protection",
+        "Real-time account alerts",
+        "Mobile app for account management"
+      ]
+    },
+    {
+      "cardName": "Chase Sapphire Preferred Card",
+      "card_name": "Chase Sapphire Preferred Card",
+      "issuing_bank": "JPMorgan Chase Bank, N.A.",
+      "sign_up_bonus": {
+        "bonus_points": 75000,
+        "spending_requirement": "$5,000 in the first 3 months"
+      },
+      "annual_fee": "$95",
+      "apr": {
+        "variable_rate": "19.74% - 29.99%",
+        "min_rate": "7.25% + 12.49%"
+      },
+      "rewards_program": {
+        "5x_points": "on travel purchased through Chase Travel",
+        "3x_points": "on dining, including eligible delivery services, takeout, and dining out",
+        "2x_points": "on other travel purchases",
+        "1x_point": "on all other purchases",
+        "anniversary_bonus": "10% of total purchases made the previous year"
+      },
+      "cash_back_percentages": {
+        "travel": "5%",
+        "dining": "3%",
+        "other_travel": "2%",
+        "other_purchases": "1%"
+      },
+      "special_offers": {
+        "hotel_credit": "$50 annual credit for hotel stays booked through Chase Travel",
+        "dashpass_membership": {
+          "duration": "12 months",
+          "value": "$120",
+          "activation_deadline": "by December 31, 2027"
+        },
+        "lyft_points": "5x points on Lyft rides through September 30, 2027",
+        "peloton_points": "5x points on Peloton equipment and accessory purchases over $150 through December 31, 2027"
+      },
+      "balance_transfer_offers": "Standard balance transfer rates apply; check terms for specifics.",
+      "introductory_apr_periods": "No introductory APR offer available.",
+      "foreign_transaction_fees": "None",
+      "credit_score_requirements": "Good to excellent credit (typically 700+)",
+      "key_benefits_and_perks": [
+        "Trip Cancellation and Interruption Insurance",
+        "Baggage Delay Insurance",
+        "Travel and Emergency Assistance",
+        "Purchase Protection",
+        "Auto Rental Coverage",
+        "Trip Delay Reimbursement",
+        "Extended Warranty Protection",
+        "24/7 customer service access"
+      ]
+    },
+    {
+      "cardName": "Wells Fargo Active Cash Card",
+      "card_name": "Wells Fargo Active Cash Card",
+      "issuing_bank": "Wells Fargo",
+      "sign_up_bonus": {
+        "amount": "$200",
+        "spending_requirement": "$500",
+        "time_frame": "within the first 3 months"
+      },
+      "annual_fee": "$0",
+      "apr": {
+        "introductory_rate": "0% for 12 months",
+        "standard_rate": {
+          "range": [
+            "18.99%",
+            "24.99%",
+            "28.99%"
+          ],
+          "type": "variable"
+        }
+      },
+      "rewards_program": {
+        "cash_back_percentage": "2%",
+        "details": "Unlimited 2% cash rewards on purchases with no categories to track or quarterly activations."
+      },
+      "special_offers": {
+        "balance_transfer": {
+          "introductory_rate": "0% for 12 months",
+          "qualifying_period": "within 120 days"
+        }
+      },
+      "foreign_transaction_fee": "3%",
+      "credit_score_requirements": "Good to Excellent",
+      "key_benefits": [
+        "Cellular Telephone Protection: Up to $600 against damage or theft (subject to a $25 deductible).",
+        "Auto Rental Collision Damage Waiver: Coverage for rental cars.",
+        "Travel and Emergency Assistance Services: Available for cardholders while traveling.",
+        "Roadside Dispatch: 24/7 roadside assistance.",
+        "Emergency Cash Disbursement and Card Replacement: Quick access to cash or card replacement.",
+        "My Wells Fargo Deals: Access to personalized deals from various merchants.",
+        "Zero Liability Protection: Protection against unauthorized transactions."
+      ]
+    },
+    {
+      "cardName": "Wells Fargo Bilt",
+      "card_name": "Bilt Mastercard®",
+      "issuing_bank": "Wells Fargo",
+      "sign_up_bonus_details": "Earn 1X points on rent payments without the transaction fee, up to 100,000 points each calendar year.",
+      "annual_fee": "$0",
+      "apr": "Variable APR based on creditworthiness",
+      "rewards_program_details": {
+        "points_on_rent": "1X points on rent payments without the transaction fee, up to 100,000 points each calendar year.",
+        "points_on_travel": "2X points on travel booked directly with airlines, hotels, cruise lines, and car rental agencies.",
+        "points_on_dining": "3X points on dining purchases.",
+        "points_on_other_purchases": "1X points on all other purchases.",
+        "special_offer": {
+          "double_points": "Earn 6X points on dining, 4X points on travel, and 2X points on other purchases on the 1st of each month, up to 1,000 bonus points."
+        }
+      },
+      "cash_back_percentages": "Not applicable; points earned instead of cash back.",
+      "special_offers_or_promotions": [
+        "No foreign transaction fees.",
+        "Lyft credits: Take 3 eligible rides with your Bilt Mastercard in a month and earn $5 in Lyft credit."
+      ],
+      "balance_transfer_offers": "Not specified.",
+      "introductory_apr_periods": "Not specified.",
+      "foreign_transaction_fees": "None.",
+      "credit_score_requirements": "Not explicitly stated; subject to credit qualification.",
+      "key_benefits_and_perks": [
+        "Trip Cancellation and Interruption Protection.",
+        "Trip Delay Reimbursement.",
+        "Auto Rental Collision Damage Waiver.",
+        "Cellular Telephone Protection up to $800.",
+        "Purchase Security for items purchased with the card."
+      ]
+    },
+    {
+      "cardName": "Chase Freedom Unlimited",
+      "card_name": "Chase Freedom Unlimited",
+      "issuing_bank": "JPMorgan Chase Bank, N.A.",
+      "sign_up_bonus": {
+        "amount": "$200",
+        "requirements": "Earn a $200 bonus after you spend $500 on purchases in the first 3 months from account opening."
+      },
+      "annual_fee": "$0",
+      "apr": {
+        "introductory_apr": "0% for 15 months on purchases and balance transfers",
+        "post_introductory_apr": "Variable APR of 18.74% to 29.99% based on creditworthiness"
+      },
+      "rewards_program": {
+        "cash_back_percentages": {
+          "general": "1.5%",
+          "dining": "3%",
+          "drugstores": "3%",
+          "travel": "5% on travel purchased through Chase Travel"
+        },
+        "no_expiration": "Cash Back rewards do not expire as long as your account is open."
+      },
+      "special_offers": {
+        "dashpass": "6 months of complimentary DashPass for DoorDash and Caviar.",
+        "lyft": "2% cash back on Lyft purchases through 09/30/2027."
+      },
+      "balance_transfer_offers": {
+        "fee": "Balance transfer fee applies, see pricing and terms."
+      },
+      "foreign_transaction_fees": "$0",
+      "credit_score_requirements": "Good to excellent credit recommended.",
+      "key_benefits": [
+        "Purchase Protection: Covers eligible new purchases for 120 days against damage or theft up to $500 per item.",
+        "Extended Warranty Protection: Extends the manufacturer's warranty by an additional year on eligible warranties of three years or less.",
+        "Trip Cancellation and Interruption Insurance: Reimbursement up to $1,500 per covered traveler and $6,000 per trip for non-refundable fares.",
+        "24/7 Fraud Monitoring: Sophisticated fraud monitoring to safeguard purchases.",
+        "Auto Rental Coverage: Coverage for theft and collision damage for most rental vehicles."
+      ]
+    }
+  ]
+}
