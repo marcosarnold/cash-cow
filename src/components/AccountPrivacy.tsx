@@ -81,7 +81,7 @@ export function AccountPrivacy({ onNavigate }: AccountPrivacyProps) {
             </div>
             <button
               onClick={() => setDataSync(!dataSync)}
-              className="relative w-12 h-7 rounded-full transition-colors flex-shrink-0 ml-4"
+              className="relative w-12 h-7 rounded-full transition-colors shrink-0 ml-4"
               style={{
                 backgroundColor: dataSync ? '#10B981' : '#E5E7EB',
               }}
@@ -132,7 +132,7 @@ export function AccountPrivacy({ onNavigate }: AccountPrivacyProps) {
           style={{ border: '1px solid #FEE2E2' }}
         >
           <div className="flex items-start gap-3">
-            <AlertTriangle className="w-5 h-5 flex-shrink-0 mt-0.5" style={{ color: '#DC2626' }} />
+            <AlertTriangle className="w-5 h-5 shrink-0 mt-0.5" style={{ color: '#DC2626' }} />
             <div className="flex-1">
               <h3 style={{ fontSize: '15px', color: '#DC2626', fontWeight: 600, marginBottom: '4px' }}>
                 Clear Local Data

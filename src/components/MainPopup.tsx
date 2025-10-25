@@ -1,4 +1,4 @@
-import { Settings, TrendingUp, X, Sparkles, Moon, Sun } from "lucide-react";
+import { Settings, TrendingUp, X, Sparkles, Moon, Sun, DollarSign } from "lucide-react";
 import { useState } from "react";
 import { HarmonyLogo } from "./HarmonyLogo";
 import { CardCarousel } from "./CardCarousel";
@@ -61,7 +61,7 @@ export function MainPopup({ onNavigate }: MainPopupProps) {
   return (
     <div className="h-full flex flex-col overflow-hidden" style={{ background: `linear-gradient(to bottom, ${colors.bg.primary} 0%, ${colors.bg.secondary} 100%)` }}>
       {/* Header */}
-      <div className="flex items-center justify-between px-6 py-4 shadow-sm border-b flex-shrink-0" style={{ backgroundColor: colors.bg.card, borderColor: colors.border.default }}>
+      <div className="flex items-center justify-between px-6 py-4 shadow-sm border-b shrink-0" style={{ backgroundColor: colors.bg.card, borderColor: colors.border.default }}>
         <HarmonyLogo size="medium" />
         <div className="flex items-center gap-2">
           <button
@@ -100,12 +100,12 @@ export function MainPopup({ onNavigate }: MainPopupProps) {
           style={{ backgroundColor: colors.bg.card, borderColor: colors.border.default }}
         >
           <div className="flex items-center gap-4">
-            {/* <div 
+            <div 
               className="w-12 h-12 rounded-xl flex items-center justify-center"
               style={{ background: `linear-gradient(135deg, ${colors.accent.gold} 0%, ${colors.accent.goldDark} 100%)` }}
             >
               <DollarSign className="w-6 h-6" style={{ color: theme === 'dark' ? colors.text.primary : '#0A2540' }} />
-            </div> */}
+            </div>
             <div className="flex-1">
               <div style={{ fontSize: '13px', color: colors.text.secondary, marginBottom: '3px' }}>Shopping at</div>
               <div style={{ fontSize: '16px', color: colors.text.primary, fontWeight: 600 }}>Chipotle</div>
@@ -151,7 +151,7 @@ export function MainPopup({ onNavigate }: MainPopupProps) {
           >
             <div className="flex items-start gap-4">
               <div 
-                className="w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0"
+                className="w-10 h-10 rounded-xl flex items-center justify-center shrink-0"
                 style={{ background: colors.success.icon }}
               >
                 <Sparkles className="w-5 h-5" style={{ color: 'white' }} />
@@ -204,7 +204,7 @@ export function MainPopup({ onNavigate }: MainPopupProps) {
       </div>
 
       {/* Footer */}
-      <div className="px-5 py-4 border-t flex-shrink-0" style={{ backgroundColor: colors.bg.card, borderColor: colors.border.default }}>
+      <div className="px-5 py-4 border-t shrink-0" style={{ backgroundColor: colors.bg.card, borderColor: colors.border.default }}>
         <button
           onClick={() => onNavigate("dashboard")}
           className="w-full text-center hover:underline transition-all group flex items-center justify-center gap-3"

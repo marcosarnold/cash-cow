@@ -188,7 +188,7 @@ function ContentOverlay() {
           >
             <div className="flex items-start gap-3">
               <div 
-                className="w-8 h-8 rounded-lg flex items-center justify-center flex-shrink-0"
+                className="w-8 h-8 rounded-lg flex items-center justify-center shrink-0"
                 style={{ background: colors.success.icon }}
               >
                 <Sparkles size={16} style={{ color: 'white' }} />

@@ -91,7 +91,7 @@ export function RewardPreferences({ onNavigate }: RewardPreferencesProps) {
                 opacity: draggedItem === pref.id ? 0.5 : 1,
               }}
             >
-              <GripVertical className="w-5 h-5 flex-shrink-0" style={{ color: '#9CA3AF' }} />
+              <GripVertical className="w-5 h-5 shrink-0" style={{ color: '#9CA3AF' }} />
               
               <div className="flex-1">
                 <div className="flex items-center gap-2">
@@ -109,7 +109,7 @@ export function RewardPreferences({ onNavigate }: RewardPreferencesProps) {
 
               <button
                 onClick={() => togglePreference(pref.id)}
-                className="relative w-12 h-7 rounded-full transition-colors flex-shrink-0"
+                className="relative w-12 h-7 rounded-full transition-colors shrink-0"
                 style={{
                   backgroundColor: pref.enabled ? '#F5B841' : '#E5E7EB',
                 }}

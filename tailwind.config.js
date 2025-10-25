@@ -9,7 +9,7 @@ export default {
     'py-3', 'py-4', 'py-5', 'py-6', 'py-10',
     'rounded-xl', 'rounded-full', 'shadow-sm', 'shadow-lg', 'shadow-xl', 'shadow-2xl',
     'border', 'border-2', 'border-t', 'border-b',
-    'flex', 'flex-col', 'flex-1', 'flex-shrink-0', 'items-center', 'items-start', 'justify-between', 'justify-center',
+    'flex', 'flex-col', 'flex-1', 'shrink-0', 'items-center', 'items-start', 'justify-between', 'justify-center',
     'w-full', 'h-full', 'w-10', 'h-10', 'w-12', 'h-12', 'w-5', 'h-5', 'w-6', 'h-6',
     'absolute', 'relative', 'top-1/2', 'left-2', 'right-2', 'z-30',
     'overflow-hidden', 'overflow-visible', 'overflow-y-auto',

@@ -122,7 +122,7 @@ export function RewardsDashboard({ onNavigate }: RewardsDashboardProps) {
             {categoryData.map((item) => (
               <div key={item.category} className="flex items-center gap-4">
                 <div
-                  className="w-4 h-4 rounded-full flex-shrink-0"
+                  className="w-4 h-4 rounded-full shrink-0"
                   style={{ backgroundColor: item.color }}
                 />
                 <div className="flex-1 flex items-center justify-between">
@@ -155,7 +155,7 @@ export function RewardsDashboard({ onNavigate }: RewardsDashboardProps) {
         >
           <div className="relative z-10">
             <div className="flex items-start gap-4 mb-5">
-              <Sparkles className="w-7 h-7 flex-shrink-0" style={{ color: '#0A2540' }} />
+              <Sparkles className="w-7 h-7 shrink-0" style={{ color: '#0A2540' }} />
               <div>
                 <h3 style={{ fontSize: '18px', color: '#0A2540', fontWeight: 700, marginBottom: '8px' }}>
                   Upgrade to Harmony Premium

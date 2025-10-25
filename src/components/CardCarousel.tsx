@@ -43,7 +43,7 @@ export function CardCarousel({ cards, optimalCardIndex, nonOptimalReasons, onCar
         {/* Navigation Arrows */}
         <button
           onClick={handlePrev}
-          className="absolute top-1/2 z-30 w-10 h-10 rounded-full shadow-xl flex items-center justify-center hover:scale-110 hover:shadow-2xl transition-all duration-300"
+          className="absolute top-1/2 left-2 z-30 w-10 h-10 rounded-full shadow-xl flex items-center justify-center hover:scale-110 hover:shadow-2xl transition-all duration-300"
           style={{ 
             backgroundColor: 'white', 
             border: `2px solid ${colors.border.default}`,
@@ -57,13 +57,12 @@ export function CardCarousel({ cards, optimalCardIndex, nonOptimalReasons, onCar
 
         <button
           onClick={handleNext}
-          className="absolute top-1/2 z-30 w-10 h-10 rounded-full shadow-xl flex items-center justify-center hover:scale-110 hover:shadow-2xl transition-all duration-300"
+          className="absolute top-1/2 right-2 z-30 w-10 h-10 rounded-full shadow-xl flex items-center justify-center hover:scale-110 hover:shadow-2xl transition-all duration-300"
           style={{ 
             backgroundColor: 'white', 
             border: `2px solid ${colors.border.default}`,
             transform: 'translateY(-50%)',
             boxShadow: '0 8px 25px rgba(0, 0, 0, 0.15)',
-            right: 0,
           }}
         >
           <ChevronRight className="w-5 h-5" style={{ color: colors.text.primary }} />
@@ -125,12 +124,12 @@ export function CardCarousel({ cards, optimalCardIndex, nonOptimalReasons, onCar
       {/* Non-optimal card warning */}
       {!isOptimal && (
         <div
-          className={`bg-gradient-to-br ${colors.warning.bg} rounded-2xl p-4 shadow-lg border-2 animate-in fade-in slide-in-from-top-4 duration-500`}
+          className={`bg-linear-to-br ${colors.warning.bg} rounded-2xl p-4 shadow-lg border-2 animate-in fade-in slide-in-from-top-4 duration-500`}
           style={{ borderColor: colors.warning.border }}
         >
           <div className="flex items-start gap-3">
             <div
-              className="w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0 shadow-md"
+              className="w-10 h-10 rounded-xl flex items-center justify-center shrink-0 shadow-md"
               style={{ backgroundColor: colors.warning.icon }}
             >
               <AlertCircle className="w-5 h-5" style={{ color: colors.warning.iconColor }} />
