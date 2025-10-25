@@ -1,17 +1,76 @@
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 import { resolve } from 'path';
+import { copyFileSync, existsSync, mkdirSync } from 'fs';
+
+// Plugin to copy manifest and other extension files
+function copyExtensionFiles() {
+  return {
+    name: 'copy-extension-files',
+    writeBundle() {
+      const distDir = resolve(__dirname, 'dist');
+      
+      // Ensure dist directory exists
+      if (!existsSync(distDir)) {
+        mkdirSync(distDir, { recursive: true });
+      }
+      
+      // Copy manifest.json
+      const manifestSrc = resolve(__dirname, 'manifest.json');
+      const manifestDest = resolve(distDir, 'manifest.json');
+      if (existsSync(manifestSrc)) {
+        copyFileSync(manifestSrc, manifestDest);
+        console.log('✓ Copied manifest.json');
+      }
+      
+      // Copy icons (PNG files)
+      const icons = [
+        { src: 'icon16.png', dest: 'icon16.png' },
+        { src: 'icon48.png', dest: 'icon48.png' },
+        { src: 'icon128.png', dest: 'icon128.png' }
+      ];
+      
+      icons.forEach(icon => {
+        const iconSrc = resolve(__dirname, icon.src);
+        const iconDest = resolve(distDir, icon.dest);
+        if (existsSync(iconSrc)) {
+          copyFileSync(iconSrc, iconDest);
+          console.log(`✓ Copied ${icon.dest}`);
+        }
+      });
+      
+      // Copy content script CSS
+      const cssSrc = resolve(__dirname, 'src/pages/content/style.css');
+      const cssDest = resolve(distDir, 'src/pages/content/style.css');
+      if (existsSync(cssSrc)) {
+        mkdirSync(resolve(distDir, 'src/pages/content'), { recursive: true });
+        copyFileSync(cssSrc, cssDest);
+        console.log('✓ Copied content script CSS');
+      }
+    }
+  };
+}
 
 export default defineConfig({
-  plugins: [react()],
+  plugins: [react(), copyExtensionFiles()],
   build: {
     outDir: 'dist',
     rollupOptions: {
       input: {
         popup: resolve(__dirname, 'popup.html'),
+        background: resolve(__dirname, 'src/pages/background/index.ts'),
+        content: resolve(__dirname, 'src/pages/content/index.tsx'),
       },
       output: {
-        entryFileNames: 'assets/[name].js',
+        entryFileNames: (chunkInfo) => {
+          if (chunkInfo.name === 'background') {
+            return 'src/pages/background/index.js';
+          }
+          if (chunkInfo.name === 'content') {
+            return 'src/pages/content/index.js';
+          }
+          return 'assets/[name].js';
+        },
         chunkFileNames: 'assets/[name].js',
         assetFileNames: 'assets/[name].[ext]',
       },

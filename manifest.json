@@ -5,7 +5,19 @@
   "description": "Find the best credit card for every online purchase in real time",
   "permissions": [
     "activeTab",
-    "storage"
+    "storage",
+    "scripting"
+  ],
+  "host_permissions": [
+    "https://www.amazon.com/*",
+    "https://www.ubereats.com/*",
+    "https://www.doordash.com/*",
+    "https://www.grubhub.com/*",
+    "https://www.costco.com/*",
+    "https://www.walmart.com/*",
+    "https://www.shell.com/*",
+    "https://www.chevron.com/*",
+    "https://www.exxon.com/*"
   ],
   "action": {
     "default_popup": "popup.html",
@@ -20,6 +32,28 @@
     "48": "icon48.png",
     "128": "icon128.png"
   },
+  "background": {
+    "service_worker": "src/pages/background/index.js",
+    "type": "module"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://www.amazon.com/*",
+        "https://www.ubereats.com/*",
+        "https://www.doordash.com/*",
+        "https://www.grubhub.com/*",
+        "https://www.costco.com/*",
+        "https://www.walmart.com/*",
+        "https://www.shell.com/*",
+        "https://www.chevron.com/*",
+        "https://www.exxon.com/*"
+      ],
+      "js": ["src/pages/content/index.js"],
+      "css": ["src/pages/content/style.css"],
+      "run_at": "document_idle"
+    }
+  ],
   "content_security_policy": {
     "extension_pages": "script-src 'self'; object-src 'self'"
   }

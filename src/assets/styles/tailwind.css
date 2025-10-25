@@ -9,3 +9,20 @@
         }
     }
 }
+
+/* Force include common classes */
+@utility p-3 { padding: 0.75rem; }
+@utility p-4 { padding: 1rem; }
+@utility p-5 { padding: 1.25rem; }
+@utility p-6 { padding: 1.5rem; }
+@utility px-3 { padding-left: 0.75rem; padding-right: 0.75rem; }
+@utility px-4 { padding-left: 1rem; padding-right: 1rem; }
+@utility px-5 { padding-left: 1.25rem; padding-right: 1.25rem; }
+@utility px-6 { padding-left: 1.5rem; padding-right: 1.5rem; }
+@utility px-10 { padding-left: 2.5rem; padding-right: 2.5rem; }
+@utility px-16 { padding-left: 4rem; padding-right: 4rem; }
+@utility py-3 { padding-top: 0.75rem; padding-bottom: 0.75rem; }
+@utility py-4 { padding-top: 1rem; padding-bottom: 1rem; }
+@utility py-5 { padding-top: 1.25rem; padding-bottom: 1.25rem; }
+@utility py-6 { padding-top: 1.5rem; padding-bottom: 1.5rem; }
+@utility py-10 { padding-top: 2.5rem; padding-bottom: 2.5rem; }

@@ -1,0 +1,116 @@
+/* Harmony Content Script Styles */
+/* Scoped with .harmony- prefix to avoid conflicts */
+
+.harmony-overlay {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'SF Pro Rounded', system-ui, sans-serif !important;
+  box-sizing: border-box !important;
+  line-height: 1.5 !important;
+}
+
+.harmony-overlay * {
+  box-sizing: border-box !important;
+}
+
+.harmony-overlay-card {
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+.harmony-minimized-button {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
+
+.harmony-minimized-button:hover {
+  transform: scale(1.1) !important;
+  box-shadow: 0 12px 40px rgba(0,0,0,0.2) !important;
+}
+
+/* Ensure overlay appears above all content */
+.harmony-overlay {
+  z-index: 2147483647 !important;
+  position: fixed !important;
+  pointer-events: auto !important;
+}
+
+/* Prevent text selection on overlay elements */
+.harmony-overlay button,
+.harmony-overlay .harmony-overlay-card {
+  user-select: none !important;
+  -webkit-user-select: none !important;
+  -moz-user-select: none !important;
+  -ms-user-select: none !important;
+}
+
+/* Smooth animations */
+.harmony-overlay-card {
+  animation: harmony-slide-in 0.5s cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
+
+@keyframes harmony-slide-in {
+  from {
+    transform: translateY(100px) scale(0.95) !important;
+    opacity: 0 !important;
+  }
+  to {
+    transform: translateY(0) scale(1) !important;
+    opacity: 1 !important;
+  }
+}
+
+/* Consistent spacing and alignment */
+.harmony-overlay-card {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 20px !important;
+}
+
+.harmony-overlay-card > * {
+  margin-bottom: 0 !important;
+}
+
+.harmony-overlay-card > *:last-child {
+  margin-bottom: 0 !important;
+}
+
+/* Responsive adjustments */
+@media (max-width: 480px) {
+  .harmony-overlay {
+    right: 10px !important;
+    bottom: 10px !important;
+    left: 10px !important;
+    max-width: none !important;
+  }
+  
+  .harmony-overlay-card {
+    padding: 16px !important;
+    gap: 16px !important;
+  }
+}
+
+/* Dark mode adjustments */
+@media (prefers-color-scheme: dark) {
+  .harmony-overlay-card {
+    box-shadow: 0 20px 60px -12px rgba(0, 0, 0, 0.4), 0 10px 30px -10px rgba(0, 0, 0, 0.3) !important;
+  }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  .harmony-overlay-card {
+    border-width: 2px !important;
+  }
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  .harmony-overlay-card,
+  .harmony-minimized-button {
+    animation: none !important;
+    transition: none !important;
+  }
+  
+  .harmony-minimized-button:hover {
+    transform: none !important;
+  }
+}
+
