@@ -1,82 +1,26 @@
 {
   "manifest_version": 3,
-  "name": "Harmony — Card Optimizer",
-  "description": "Optimize your credit card rewards by finding the best card for each purchase",
-  "version": "0.1.1",
-  "action": {
-    "default_popup": "src/pages/popup/index.html",
-    "default_icon": {
-      "32": "icon-32.png",
-      "128": "icon-128.png"
-    }
-  },
-  "options_ui": {
-    "page": "src/pages/options/index.html",
-    "open_in_tab": true
-  },
-  "background": {
-    "service_worker": "src/pages/background/index.ts"
-  },
+  "name": "Harmony - Smart Credit Card Rewards",
+  "version": "1.0.0",
+  "description": "Find the best credit card for every online purchase in real time",
   "permissions": [
     "activeTab",
-    "scripting",
     "storage"
   ],
-  "host_permissions": [
-    "https://www.amazon.com/*",
-    "https://www.ubereats.com/*",
-    "https://www.doordash.com/*",
-    "https://www.grubhub.com/*",
-    "https://www.costco.com/*",
-    "https://www.walmart.com/*",
-    "https://www.shell.com/*",
-    "https://www.chevron.com/*",
-    "https://www.exxon.com/*"
-  ],
-  "content_scripts": [
-    {
-      "matches": [
-        "https://www.amazon.com/*",
-        "https://www.ubereats.com/*",
-        "https://www.doordash.com/*",
-        "https://www.grubhub.com/*",
-        "https://www.costco.com/*",
-        "https://www.walmart.com/*",
-        "https://www.shell.com/*",
-        "https://www.chevron.com/*",
-        "https://www.exxon.com/*"
-      ],
-      "js": [
-        "src/pages/content/index.tsx"
-      ],
-      "css": [
-        "src/pages/content/style.css"
-      ],
-      "run_at": "document_idle"
+  "action": {
+    "default_popup": "popup.html",
+    "default_icon": {
+      "16": "icon16.png",
+      "48": "icon48.png",
+      "128": "icon128.png"
     }
-  ],
-  "icons": {
-    "32": "icon-32.png",
-    "128": "icon-128.png"
   },
-  "web_accessible_resources": [
-    {
-      "resources": [
-        "src/pages/content/style.css",
-        "icon-128.png",
-        "icon-32.png"
-      ],
-      "matches": [
-        "https://www.amazon.com/*",
-        "https://www.ubereats.com/*",
-        "https://www.doordash.com/*",
-        "https://www.grubhub.com/*",
-        "https://www.costco.com/*",
-        "https://www.walmart.com/*",
-        "https://www.shell.com/*",
-        "https://www.chevron.com/*",
-        "https://www.exxon.com/*"
-      ]
-    }
-  ]
+  "icons": {
+    "16": "icon16.png",
+    "48": "icon48.png",
+    "128": "icon128.png"
+  },
+  "content_security_policy": {
+    "extension_pages": "script-src 'self'; object-src 'self'"
+  }
 }
