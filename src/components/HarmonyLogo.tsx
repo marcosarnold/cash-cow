@@ -24,8 +24,8 @@ export function HarmonyLogo({ className = "", size = 'medium', variant = 'full' 
   // Get the appropriate logo based on theme
   const getLogoImage = () => {
     if (theme === 'dark') {
-      // Use blue/dark version for dark mode
-      return "/src/assets/logos/unnamed (1).jpg"; // Adjust filename as needed
+      // Use blue/dark version for dark mode (should be unnamed.jpg based on your files)
+      return "/src/assets/logos/unnamed.jpg";
     } else {
       // Use white background version for light mode
       return "/src/assets/logos/harmony logo.png";

@@ -6,8 +6,18 @@
   "permissions": [
     "activeTab",
     "storage",
-    "scripting"
+    "scripting",
+    "notifications"
   ],
+  "commands": {
+    "open-popup": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+H",
+        "mac": "Command+Shift+H"
+      },
+      "description": "Open Harmony recommendations"
+    }
+  },
   "host_permissions": [
     "https://www.amazon.com/*",
     "https://www.ubereats.com/*",
@@ -48,8 +58,7 @@
         "https://www.chevron.com/*",
         "https://www.exxon.com/*"
       ],
-      "js": ["src/pages/content/index.js"],
-      "css": ["src/pages/content/style.css"],
+      "js": ["src/pages/content/amazon-amount.js"],
       "run_at": "document_idle"
     }
   ],

@@ -1,14 +1,10 @@
 // Merchant detection logic for content script
-export interface TransactionContext {
-  merchantId: string;
-  merchantName: string;
-  category: string;
-  amount: number;
-  url: string;
-}
+import { TransactionContext as TransactionContextType, Category } from "../../../lib/types";
+
+export type TransactionContext = TransactionContextType;
 
 // Merchant mapping
-const MERCHANT_MAP: Record<string, { name: string; category: string }> = {
+const MERCHANT_MAP: Record<string, { name: string; category: Category }> = {
   'amazon.com': { name: 'Amazon', category: 'online' },
   'ubereats.com': { name: 'Uber Eats', category: 'dining' },
   'doordash.com': { name: 'DoorDash', category: 'dining' },
@@ -20,8 +16,18 @@ const MERCHANT_MAP: Record<string, { name: string; category: string }> = {
   'exxon.com': { name: 'Exxon', category: 'gas' },
 };
 
-// Amount detection patterns
+// Amount detection patterns (including Amazon-specific)
 const AMOUNT_PATTERNS = [
+  // Amazon-specific
+  '#sc-subtotal-amount-buybox',
+  '#sc-subtotal-amount-activecart',
+  '.sc-price',
+  '[class*="sc-price"]',
+  '[class*="price-display"]',
+  '[data-a-color="price"]',
+  '[data-a-color="secondary"]',
+  '[class*="order-summary"]',
+  '[id*="sc-subtotal"]',
   // Common checkout selectors
   '[data-testid*="total"]',
   '[data-testid*="amount"]',
@@ -40,7 +46,7 @@ const AMOUNT_PATTERNS = [
   '[id*="price"]',
 ];
 
-function extractMerchantFromUrl(url: string): { id: string; name: string; category: string } | null {
+function extractMerchantFromUrl(url: string): { id: string; name: string; category: Category } | null {
   try {
     const hostname = new URL(url).hostname.toLowerCase();
     
@@ -175,32 +181,31 @@ function isCheckoutPage(): boolean {
 
 export function getTransactionContext(): TransactionContext | null {
   try {
-    // Check if we're on a checkout page
-    if (!isCheckoutPage()) {
-      return null;
-    }
-    
-    // Extract merchant info
+    // For now, use traditional detection (synchronous)
+    // Async agentic detection is handled in content script
     const merchantInfo = extractMerchantFromUrl(window.location.href);
+    
     if (!merchantInfo) {
+      // Don't show overlay if no merchant detected
       return null;
     }
     
-    // Extract amount
+    // Extract amount from page
     const amount = extractAmountFromPage();
-    if (!amount) {
-      return null;
-    }
+    
+    // Use default amount if not detected (so overlay still shows)
+    const finalAmount = amount && amount > 0 ? amount : null;
     
     return {
       merchantId: merchantInfo.id,
       merchantName: merchantInfo.name,
-      category: merchantInfo.category,
-      amount: amount,
+      category: merchantInfo.category as Category,
+      amount: finalAmount || 0, // Allow 0 so overlay shows
       url: window.location.href,
     };
   } catch (error) {
     console.warn('Harmony: Error extracting transaction context', error);
+    // Don't show overlay if error
     return null;
   }
 }

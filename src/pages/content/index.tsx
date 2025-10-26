@@ -4,55 +4,81 @@ import { Sparkles, TrendingUp, X, DollarSign } from 'lucide-react';
 import { HarmonyLogo } from '../../components/HarmonyLogo';
 import { CreditCardDisplay, CreditCardData } from '../../components/CreditCardDisplay';
 import { MinimizedWidget } from '../../components/MinimizedWidget';
-import { useTheme, getThemeColors } from '../../components/ThemeContext';
+import { ThemeProvider, useTheme, getThemeColors } from '../../components/ThemeContext';
+import { getTransactionContext } from './merchant/detect';
+import { CARDS } from '../../lib/rewards/rules';
+import { recommend } from '../../lib/rewards/engine';
 
-// Mock data for demonstration
-const mockCards: CreditCardData[] = [
-  {
-    id: "1",
-    name: "Amex Gold",
-    type: "American Express",
-    last4: "7997",
-    color: "linear-gradient(135deg, #D4AF37 0%, #B8860B 100%)",
+// Convert our Card type to CreditCardData for display
+function convertToDisplayCard(card: any): CreditCardData {
+  return {
+    id: card.id,
+    name: card.displayName,
+    type: card.network,
+    last4: "0000",
+    color: getCardColor(card.network),
     rewardType: "Points",
-    network: "amex",
-  },
-  {
-    id: "2",
-    name: "Chase Sapphire Preferred",
-    type: "Chase",
-    last4: "1234",
-    color: "linear-gradient(135deg, #1E3A8A 0%, #1E40AF 100%)",
-    rewardType: "Points",
-    network: "visa",
-  },
-];
+    network: card.network.toLowerCase() as any,
+  };
+}
 
-const mockRecommendation = {
-  card: mockCards[0],
-  effectiveRate: "4×",
-  estimatedValue: "$2.40",
-  rationale: [
-    "Amex Gold earns 4× points on dining",
-    "Maximize rewards for this purchase",
-    "240 bonus points earned"
-  ]
-};
+function getCardColor(network: string): string {
+  const colors: Record<string, string> = {
+    'Amex': 'linear-gradient(135deg, #D4AF37 0%, #B8860B 100%)',
+    'Visa': 'linear-gradient(135deg, #1E3A8A 0%, #1E40AF 100%)',
+    'Mastercard': 'linear-gradient(135deg, #EB001B 0%, #FF5F00 100%)',
+    'Discover': 'linear-gradient(135deg, #8B0000 0%, #A0522D 100%)',
+  };
+  return colors[network] || 'linear-gradient(135deg, #2E5266 0%, #1A3A4A 100%)';
+}
 
+// Wrapped with ThemeProvider
 function ContentOverlay() {
+  return (
+    <ThemeProvider>
+      <ContentOverlayInner />
+    </ThemeProvider>
+  );
+}
+
+function ContentOverlayInner() {
   const [isVisible, setIsVisible] = useState(false);
   const [isMinimized, setIsMinimized] = useState(false);
   const [showMinimizedWidget, setShowMinimizedWidget] = useState(false);
+  const [recommendation, setRecommendation] = useState<any>(null);
+  const [transaction, setTransaction] = useState<any>(null);
   const { theme } = useTheme();
   const colors = getThemeColors(theme);
 
   useEffect(() => {
-    // Show overlay after a short delay to simulate detection
-    const timer = setTimeout(() => {
-      setIsVisible(true);
-    }, 1000);
-
-    return () => clearTimeout(timer);
+    // Get transaction context from the page
+    const transactionCtx = getTransactionContext();
+    
+    if (transactionCtx) {
+      console.log('Harmony: Transaction detected', transactionCtx);
+      
+      // Get recommendation using the real engine
+      try {
+        const rec = recommend(transactionCtx, CARDS, []);
+        console.log('Harmony: Recommendation generated', rec);
+        
+        setTransaction(transactionCtx);
+        setRecommendation({
+          card: convertToDisplayCard(rec.card),
+          effectiveRate: `${(rec.effectiveRate * 100).toFixed(1)}%`,
+          estimatedValue: `$${rec.estimatedValue.toFixed(2)}`,
+          rationale: rec.rationale,
+        });
+        setIsVisible(true);
+      } catch (error) {
+        console.error('Harmony: Error generating recommendation', error);
+        setIsVisible(false);
+      }
+    } else {
+      // No transaction detected - don't show overlay
+      console.log('Harmony: No transaction detected on this page');
+      setIsVisible(false);
+    }
   }, []);
 
   const handleClose = () => {
@@ -69,7 +95,7 @@ function ContentOverlay() {
     setShowMinimizedWidget(false);
   };
 
-  if (!isVisible) return null;
+  if (!isVisible || !recommendation) return null;
 
   return (
     <>
@@ -77,7 +103,7 @@ function ContentOverlay() {
       {showMinimizedWidget && (
         <MinimizedWidget 
           onExpand={handleExpand}
-          recommendation={mockRecommendation}
+          recommendation={recommendation}
         />
       )}
 
@@ -131,7 +157,7 @@ function ContentOverlay() {
         >
           {/* Header */}
           <div className="flex items-center justify-between mb-4">
-            <HarmonyLogo size="medium" />
+            <HarmonyLogo size="medium" variant="icon-only" />
             <div className="flex items-center gap-2">
               <button
                 onClick={handleMinimize}
@@ -164,18 +190,22 @@ function ContentOverlay() {
               </div>
               <div className="flex-1">
                 <div style={{ fontSize: '12px', color: colors.text.secondary, marginBottom: '2px' }}>Shopping at</div>
-                <div style={{ fontSize: '14px', color: colors.text.primary, fontWeight: 600 }}>Chipotle</div>
+                <div style={{ fontSize: '14px', color: colors.text.primary, fontWeight: 600 }}>{transaction?.merchantName || 'Unknown Merchant'}</div>
               </div>
               <div className="text-right">
                 <div style={{ fontSize: '12px', color: colors.text.secondary, marginBottom: '2px' }}>Amount</div>
-                <div style={{ fontSize: '16px', color: colors.text.primary, fontWeight: 700 }}>$60.00</div>
+                <div style={{ fontSize: '16px', color: colors.text.primary, fontWeight: 700 }}>{
+                  transaction?.amount && transaction.amount > 0 
+                    ? `$${transaction.amount.toFixed(2)}` 
+                    : 'Check page'
+                }</div>
               </div>
             </div>
           </div>
 
           {/* Card Display */}
           <div className="mb-5">
-            <CreditCardDisplay card={mockRecommendation.card} />
+            <CreditCardDisplay card={recommendation.card} />
           </div>
 
           {/* Recommendation */}

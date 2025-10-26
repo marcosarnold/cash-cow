@@ -63,3 +63,7 @@ export interface StoredRecommendation {
 export interface DomainAllowlist {
   domains: string[];
 }
+
+
+
+

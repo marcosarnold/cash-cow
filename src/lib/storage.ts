@@ -5,14 +5,14 @@ export async function getFeatureFlags(): Promise<FeatureFlags> {
   try {
     const result = await chrome.storage.sync.get("featureFlags");
     return result.featureFlags || {
-      USE_MOCK_DATA: true,
+      USE_MOCK_DATA: false, // Now using real data!
       ENABLE_FETCH_AGENT: false,
       ENABLE_ADS: false
     };
   } catch (error) {
     console.error("Failed to get feature flags:", error);
     return {
-      USE_MOCK_DATA: true,
+      USE_MOCK_DATA: false,
       ENABLE_FETCH_AGENT: false,
       ENABLE_ADS: false
     };
@@ -65,3 +65,4 @@ export async function setDomainAllowlist(allowlist: DomainAllowlist): Promise<vo
     throw error;
   }
 }
+

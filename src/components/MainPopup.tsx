@@ -1,14 +1,17 @@
 import { Settings, TrendingUp, X, Sparkles, Moon, Sun, DollarSign } from "lucide-react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { HarmonyLogo } from "./HarmonyLogo";
 import { CardCarousel } from "./CardCarousel";
 import { CreditCardData } from "./CreditCardDisplay";
 import { useTheme, getThemeColors } from "./ThemeContext";
+import { TransactionContext } from "../lib/types";
 
 interface MainPopupProps {
   onNavigate: (screen: string) => void;
+  tabInfo?: { merchantName: string; amount: string; category?: string } | null;
 }
 
+// YOUR ACTUAL CARDS - Real data!
 const sampleCards: CreditCardData[] = [
   {
     id: "1",
@@ -39,30 +42,181 @@ const sampleCards: CreditCardData[] = [
   },
 ];
 
-const optimalCardIndex = 0; // Amex Gold is optimal
-const optimalReason = "Amex Gold earns 4× points on dining and restaurants. Use this card to maximize your rewards.";
-const nonOptimalReasons = {
-  "2": "Chase Sapphire only earns 2× points on dining, compared to Amex Gold's 4× points. You'd miss out on 120 bonus points (~$1.20).",
-  "3": "Discover It only earns 1% cashback on dining, while Amex Gold earns 4× points (~4% back). You'd miss out on ~$1.80 in rewards.",
+// Calculate best card and order cards by reward maximization
+function getBestCardForCategory(
+  category: string | null, 
+  amount: number
+): { index: number; reason: string; nonOptimal: Record<string, string>; orderedCards: CreditCardData[] } {
+  if (!category) category = 'general';
+
+  // REWARD RATES - Your actual cards with real categories!
+  const cardRewards: Record<string, Record<string, number>> = {
+    'Amex Gold': {
+      dining: 4,      // BEST for dining!
+      groceries: 4,   // BEST for groceries!
+      travel: 3,      // Good for travel
+      online: 1,      // Not great for online
+      gas: 1,         // Not great for gas
+      general: 1,     // Base rate
+    },
+    'Chase Sapphire Preferred': {
+      dining: 3,      // Good for dining
+      travel: 2,      // Good for travel
+      online: 3,      // BEST for online! (unique bonus)
+      groceries: 1,  // Not great for groceries
+      gas: 1,         // Not great for gas
+      general: 1,     // Base rate
+    },
+    'Discover It': {
+      dining: 1,      // Base
+      groceries: 1, // Base
+      travel: 1,      // Base
+      online: 1,      // Base
+      gas: 5,         // BEST if in rotating category!
+      general: 1,     // Base rate
+    },
+  };
+
+  // Calculate rewards for each card WITH expected value calculation
+  const cardCalculations: Array<{ 
+    card: CreditCardData; 
+    index: number; 
+    rate: number; 
+    expectedValue: number;
+    name: string;
+    reason: string;
+  }> = [];
+
+  console.log(`🔢 Calculating rewards for category: ${category}, amount: ${amount}`);
+  
+  sampleCards.forEach((card, index) => {
+    const rate = cardRewards[card.name]?.[category] || 1;
+    const expectedValue = amount * rate; // Total points expected
+    
+    console.log(`  💳 ${card.name}: ${rate}× on ${category} = ${expectedValue.toFixed(0)} points`);
+    
+    let reason = '';
+    if (rate > 1) {
+      reason = `Earns ${rate}× points on ${category} = ${expectedValue.toFixed(0)} points`;
+    } else {
+      reason = `Earns ${rate}× points (base rate) = ${expectedValue.toFixed(0)} points`;
+    }
+    
+    cardCalculations.push({ 
+      card, 
+      index, 
+      rate, 
+      expectedValue, 
+      name: card.name, 
+      reason 
+    });
+  });
+
+  // Sort cards by expected value (highest first)
+  cardCalculations.sort((a, b) => b.expectedValue - a.expectedValue);
+
+  // Find best card (now at index 0 after sorting)
+  const bestCard = cardCalculations[0];
+
+  // Create ordered cards array for carousel (best card is first)
+  const orderedCards = cardCalculations.map(calc => calc.card);
+
+  // Create nonOptimal reasons for cards (indexed by their NEW position in orderedCards)
+  const nonOptimal: Record<string, string> = {};
+  cardCalculations.forEach((calc, newIndex) => {
+    if (newIndex !== 0) { // Skip the best card (index 0)
+      nonOptimal[newIndex.toString()] = calc.reason;
+    }
+  });
+
+  console.log(`📊 Category: ${category} → Best: ${bestCard.name} (${bestCard.rate}×) = ${bestCard.expectedValue.toFixed(0)} points`);
+  console.log(`📊 Ordered by rewards:`, cardCalculations.map(c => `${c.name}: ${c.expectedValue.toFixed(0)} pts`));
+
+  return { 
+    index: 0, // Best card is always at index 0 after ordering
+    reason: bestCard.reason, 
+    nonOptimal,
+    orderedCards 
+  };
+}
+
+const categoryMap: Record<string, string> = {
+  'Amazon': 'online',
+  'Uber Eats': 'dining',
+  'DoorDash': 'dining',
+  'Grubhub': 'dining',
+  'Costco': 'groceries',
+  'Walmart': 'groceries',
+  'Shell': 'gas',
+  'Chevron': 'gas',
+  'Exxon': 'gas',
 };
 
-export function MainPopup({ onNavigate }: MainPopupProps) {
+export function MainPopup({ onNavigate, tabInfo }: MainPopupProps) {
   const [currentCardIndex, setCurrentCardIndex] = useState(0);
+  const [transactionContext, setTransactionContext] = useState<TransactionContext | null>(null);
+  const [bestCard, setBestCard] = useState({ index: 0, reason: '', nonOptimal: {} as Record<string, string>, orderedCards: sampleCards });
+  const [displayCards, setDisplayCards] = useState(sampleCards);
   const { theme, toggleTheme } = useTheme();
   const colors = getThemeColors(theme);
+  
+  // Calculate best card based on current merchant (using AI or fallback)
+  useEffect(() => {
+    if (tabInfo?.merchantName) {
+      // Use AI category if available, otherwise use category map
+      const category = tabInfo.category || categoryMap[tabInfo.merchantName] || 'general';
+      const amount = transactionContext?.amount || parseFloat(tabInfo.amount?.replace('$', '') || '0') || 50;
+      
+      console.log('🔍 === RECOMMENDATION DEBUG ===');
+      console.log('🏪 Merchant:', tabInfo.merchantName);
+      console.log('📂 Category (from AI):', tabInfo.category);
+      console.log('📂 Category (fallback):', categoryMap[tabInfo.merchantName]);
+      console.log('📂 Final Category:', category);
+      console.log('💰 Amount:', amount);
+      
+      const recommendation = getBestCardForCategory(category, amount);
+      console.log('🎯 Best card:', recommendation.orderedCards[0].name);
+      console.log('📝 Reason:', recommendation.reason);
+      console.log('📊 Ordered cards:', recommendation.orderedCards.map(c => c.name).join(' → '));
+      console.log('================================');
+      
+      setBestCard(recommendation);
+      setDisplayCards(recommendation.orderedCards);
+      setCurrentCardIndex(0); // Best card is always at index 0 in ordered cards
+    }
+  }, [tabInfo, transactionContext]);
+  
+  // Fetch transaction context from Chrome storage
+  useEffect(() => {
+    const fetchTransactionContext = async () => {
+      try {
+        // Check if we're in a Chrome extension environment
+        if (typeof chrome !== 'undefined' && chrome.storage) {
+          const result = await chrome.storage.local.get(['lastContext']);
+          if (result.lastContext) {
+            setTransactionContext(result.lastContext);
+          }
+        }
+      } catch (error) {
+        console.error('Failed to fetch transaction context:', error);
+      }
+    };
+    
+    fetchTransactionContext();
+  }, []);
   
   const handleClose = () => {
     // In a real Chrome extension, this would close the popup
     window.close();
   };
 
-  const isOptimal = currentCardIndex === optimalCardIndex;
+  const isOptimal = currentCardIndex === bestCard.index;
 
   return (
     <div className="h-full flex flex-col overflow-hidden rounded-lg" style={{ background: `linear-gradient(to bottom, ${colors.bg.primary} 0%, ${colors.bg.secondary} 100%)`, borderRadius: '12px' }}>
       {/* Header */}
       <div className="flex items-center justify-between px-6 py-4 shadow-sm border-b shrink-0" style={{ backgroundColor: colors.bg.card, borderColor: colors.border.default }}>
-        <HarmonyLogo size="medium" />
+        <HarmonyLogo size="medium" variant="icon-only" />
         <div className="flex items-center gap-2">
           <button
             onClick={toggleTheme}
@@ -108,11 +262,15 @@ export function MainPopup({ onNavigate }: MainPopupProps) {
             </div>
             <div className="flex-1">
               <div style={{ fontSize: '13px', color: colors.text.secondary, marginBottom: '3px' }}>Shopping at</div>
-              <div style={{ fontSize: '16px', color: colors.text.primary, fontWeight: 600 }}>Chipotle</div>
+              <div style={{ fontSize: '16px', color: colors.text.primary, fontWeight: 600 }}>{tabInfo?.merchantName || transactionContext?.merchantName || 'Unknown Merchant'}</div>
             </div>
             <div className="text-right">
               <div style={{ fontSize: '13px', color: colors.text.secondary, marginBottom: '3px' }}>Amount</div>
-              <div style={{ fontSize: '18px', color: colors.text.primary, fontWeight: 700 }}>$60.00</div>
+              <div style={{ fontSize: '18px', color: colors.text.primary, fontWeight: 700 }}>{
+                transactionContext?.amount && transactionContext.amount > 0 
+                  ? `$${transactionContext.amount.toFixed(2)}` 
+                  : tabInfo?.amount || 'Check page'
+              }</div>
             </div>
           </div>
         </div>
@@ -132,10 +290,10 @@ export function MainPopup({ onNavigate }: MainPopupProps) {
             </button>
           </div>
           <CardCarousel 
-            cards={sampleCards}
-            optimalCardIndex={optimalCardIndex}
-            optimalReason={optimalReason}
-            nonOptimalReasons={nonOptimalReasons}
+            cards={displayCards}
+            optimalCardIndex={bestCard.index}
+            optimalReason={bestCard.reason}
+            nonOptimalReasons={bestCard.nonOptimal}
             onCardChange={setCurrentCardIndex}
           />
         </div>
@@ -166,7 +324,7 @@ export function MainPopup({ onNavigate }: MainPopupProps) {
                   </span>
                 </div>
                 <p style={{ fontSize: '14px', color: colors.success.text, lineHeight: '1.5', marginBottom: '12px' }}>
-                  <span style={{ fontWeight: 600, color: theme === 'dark' ? colors.text.primary : '#0A2540' }}>Amex Gold</span> earns 4× points on dining. Maximize your rewards.
+                  {bestCard.reason}. Maximize your rewards.
                 </p>
                 <div 
                   className="px-4 py-3 rounded-xl inline-flex items-center gap-3"
@@ -174,10 +332,10 @@ export function MainPopup({ onNavigate }: MainPopupProps) {
                 >
                   <TrendingUp className="w-5 h-5" style={{ color: colors.success.badgeText }} />
                   <span style={{ fontSize: '14px', color: colors.success.badgeText, fontWeight: 700 }}>
-                    +240 points
+                    {tabInfo && tabInfo.amount && tabInfo.amount !== 'Check page' ? `+${(parseFloat(tabInfo.amount.replace('$', '')) || transactionContext?.amount || 0).toFixed(0)} points` : 'Maximize rewards'}
                   </span>
                   <span style={{ fontSize: '12px', color: colors.success.badgeText, opacity: 0.8 }}>
-                    (~$2.40)
+                    {tabInfo && tabInfo.amount && tabInfo.amount !== 'Check page' ? `($${((parseFloat(tabInfo.amount.replace('$', '')) || transactionContext?.amount || 0) / 100).toFixed(2)})` : ''}
                   </span>
                 </div>
               </div>

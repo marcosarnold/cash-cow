@@ -26,19 +26,15 @@ function copyExtensionFiles() {
         console.log('✓ Copied manifest.json');
       }
       
-      // Copy icons (PNG files)
-      const icons = [
-        { src: 'icon16.png', dest: 'icon16.png' },
-        { src: 'icon48.png', dest: 'icon48.png' },
-        { src: 'icon128.png', dest: 'icon128.png' }
-      ];
+      // Copy icons (use Harmony logo from logos directory)
+      const logoPath = resolve(__dirname, 'src/assets/logos/harmony logo.png');
+      const iconFiles = ['icon16.png', 'icon48.png', 'icon128.png'];
       
-      icons.forEach(icon => {
-        const iconSrc = resolve(__dirname, icon.src);
-        const iconDest = resolve(distDir, icon.dest);
-        if (existsSync(iconSrc)) {
-          copyFileSync(iconSrc, iconDest);
-          console.log(`✓ Copied ${icon.dest}`);
+      iconFiles.forEach(iconFile => {
+        const iconDest = resolve(distDir, iconFile);
+        if (existsSync(logoPath)) {
+          copyFileSync(logoPath, iconDest);
+          console.log(`✓ Copied ${iconFile} (using Harmony logo)`);
         }
       });
       
@@ -49,6 +45,20 @@ function copyExtensionFiles() {
             mkdirSync(resolve(distDir, 'src/pages/content'), { recursive: true });
             copyFileSync(cssSrc, cssDest);
             console.log('✓ Copied content script CSS');
+          }
+
+          // Copy content script (amazon-amount.js)
+          const contentScriptsDir = resolve(distDir, 'src/pages/content');
+          if (!existsSync(contentScriptsDir)) {
+            mkdirSync(contentScriptsDir, { recursive: true });
+          }
+          
+          const contentScript = 'amazon-amount.js';
+          const scriptSrc = resolve(__dirname, 'src/pages/content', contentScript);
+          const scriptDest = resolve(contentScriptsDir, contentScript);
+          if (existsSync(scriptSrc)) {
+            copyFileSync(scriptSrc, scriptDest);
+            console.log(`✓ Copied ${contentScript}`);
           }
 
           // Copy card images
@@ -81,6 +91,16 @@ function copyExtensionFiles() {
                 console.log(`✓ Copied ${file}`);
               }
             });
+          }
+
+          // Copy credit card rewards JSON
+          const jsonSrc = resolve(__dirname, 'src/lib/credit_card_rewards.json');
+          const jsonDestDir = resolve(distDir, 'src/lib');
+          const jsonDest = resolve(jsonDestDir, 'credit_card_rewards.json');
+          if (existsSync(jsonSrc)) {
+            mkdirSync(jsonDestDir, { recursive: true });
+            copyFileSync(jsonSrc, jsonDest);
+            console.log(`✓ Copied credit_card_rewards.json`);
           }
     }
   };

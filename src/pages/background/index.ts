@@ -1,5 +1,7 @@
 // Background service worker for Harmony extension
 import { TransactionContext } from '../content/merchant/detect';
+import { recommend } from '../../lib/rewards/engine';
+import { CARDS } from '../../lib/rewards/rules';
 
 // Message types
 interface Message {
@@ -22,53 +24,60 @@ interface Recommendation {
   rationale: string[];
 }
 
-// Mock reward engine (in a real app, this would be more sophisticated)
+// Use the real reward engine
 function calculateRecommendation(context: TransactionContext): Recommendation {
-  // Mock cards data
-  const cards = [
-    {
-      id: "1",
-      name: "Amex Gold",
-      type: "American Express",
-      last4: "7997",
-      color: "linear-gradient(135deg, #D4AF37 0%, #B8860B 100%)",
-      rewardType: "Points",
-      network: "amex",
-    },
-    {
-      id: "2",
-      name: "Chase Sapphire Preferred",
-      type: "Chase",
-      last4: "1234",
-      color: "linear-gradient(135deg, #1E3A8A 0%, #1E40AF 100%)",
-      rewardType: "Points",
-      network: "visa",
-    },
-  ];
-
-  // Simple logic: Amex Gold for dining, Chase Sapphire for others
-  const bestCard = context.category === 'dining' ? cards[0] : cards[1];
-  const multiplier = context.category === 'dining' ? 4 : 2;
-  const points = Math.round(context.amount * multiplier);
-  const value = (points * 0.01).toFixed(2);
-
-  return {
-    card: bestCard,
-    effectiveRate: `${multiplier}×`,
-    estimatedValue: `$${value}`,
-    rationale: [
-      `${bestCard.name} earns ${multiplier}× points on ${context.category}`,
-      `Maximize rewards for this purchase`,
-      `${points} bonus points earned`
-    ]
-  };
+  try {
+    // Use the real engine from lib/rewards/engine.ts
+    const result = recommend(context, CARDS, []);
+    
+    // Convert to the format expected by the message handler
+    return {
+      card: {
+        id: result.card.id,
+        name: result.card.displayName,
+        type: result.card.network,
+        last4: "0000", // Real cards would have last4 from storage
+        color: getCardColor(result.card.network),
+        rewardType: "Points",
+        network: result.card.network.toLowerCase(),
+      },
+      effectiveRate: `${(result.effectiveRate * 100).toFixed(1)}%`,
+      estimatedValue: `$${result.estimatedValue.toFixed(2)}`,
+      rationale: result.rationale
+    };
+  } catch (error) {
+    console.error('Error calculating recommendation:', error);
+    throw error;
+  }
 }
 
-// Message handler
+function getCardColor(network: string): string {
+  const colors: Record<string, string> = {
+    'Amex': 'linear-gradient(135deg, #D4AF37 0%, #B8860B 100%)',
+    'Visa': 'linear-gradient(135deg, #1E3A8A 0%, #1E40AF 100%)',
+    'Mastercard': 'linear-gradient(135deg, #EB001B 0%, #FF5F00 100%)',
+    'Discover': 'linear-gradient(135deg, #8B0000 0%, #A0522D 100%)',
+  };
+  return colors[network] || 'linear-gradient(135deg, #2E5266 0%, #1A3A4A 100%)';
+}
+
+
+// Handle checkout detection - auto-open popup
 chrome.runtime.onMessage.addListener((message: Message, _sender, sendResponse) => {
   console.log('Harmony background received message:', message);
 
   switch (message.type) {
+    case 'CHECKOUT_DETECTED':
+      // Show badge on extension icon (Honey-style)
+      console.log('🛒 Checkout detected! Updating badge...');
+      
+      // Update badge
+      chrome.action.setBadgeText({ text: '!' });
+      chrome.action.setBadgeBackgroundColor({ color: '#F59E0B' });
+      
+      sendResponse({ success: true });
+      return false;
+
     case 'HARMONY_EVAL':
       // Evaluate transaction context
       chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
@@ -123,9 +132,26 @@ chrome.runtime.onMessage.addListener((message: Message, _sender, sendResponse) =
       });
       return true;
 
+    case 'HARMONY_SHOW_READY':
+      // Show badge and update icon
+      chrome.action.setBadgeText({ text: '!' });
+      chrome.action.setBadgeBackgroundColor({ color: '#F59E0B' });
+      console.log('✅ Harmony ready - user should click icon');
+      sendResponse({ success: true });
+      return false;
+
     default:
       sendResponse({ success: false, error: 'Unknown message type' });
       return false;
+  }
+});
+
+// Handle keyboard shortcuts
+chrome.commands.onCommand.addListener((command) => {
+  if (command === 'open-popup') {
+    chrome.action.openPopup().catch(() => {
+      console.log('Popup could not be opened programmatically');
+    });
   }
 });
 
@@ -135,7 +161,7 @@ chrome.runtime.onInstalled.addListener((details) => {
   
   // Set default settings
   chrome.storage.sync.set({
-    USE_MOCK_DATA: true,
+    USE_MOCK_DATA: false, // Now using real data!
     ENABLE_FETCH_AGENT: false,
     ENABLE_ADS: false,
     enabledDomains: [
