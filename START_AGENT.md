@@ -6,7 +6,7 @@
 
 **Option A - PowerShell (Easiest):**
 ```powershell
-cd C:\Users\User\Desktop\template\harmony-main
+cd C:\Users\User\Desktop\template\Cash Cow-main
 python simple_agent.py
 ```
 
@@ -24,7 +24,7 @@ python simple_agent.py
 ## Step 2: Load Extension
 
 1. Go to `chrome://extensions/`
-2. **Remove** old Harmony
+2. **Remove** old Cash Cow
 3. **Load unpacked** → Select `dist` folder
 4. ✅ **DONE!**
 

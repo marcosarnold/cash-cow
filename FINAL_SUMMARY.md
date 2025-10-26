@@ -1,4 +1,4 @@
-# 🎉 Harmony Extension - Final Implementation
+# 🎉 Cash Cow Extension - Final Implementation
 
 ## ✅ How It Works
 

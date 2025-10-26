@@ -1,4 +1,4 @@
-# Harmony — Card Optimizer
+# Cash Cow — Card Optimizer
 
 A Chrome extension that helps you optimize credit card rewards by finding the best card for each purchase.
 
@@ -123,5 +123,5 @@ src/
 - [x] No console errors; service worker responds; manifest validates
 - [x] TypeScript strict mode; ESLint/Prettier clean
 - [x] Works on Amazon and Uber Eats demo domains
-- [x] Scoped CSS with harmony- prefix prevents conflicts
+- [x] Scoped CSS with Cash Cow- prefix prevents conflicts
 - [x] Pure reward engine with no external dependencies

@@ -26,15 +26,15 @@ function copyExtensionFiles() {
         console.log('✓ Copied manifest.json');
       }
       
-      // Copy icons (use Harmony logo from logos directory)
-      const logoPath = resolve(__dirname, 'src/assets/logos/harmony logo.png');
+      // Copy icons (use Cash Cow logo from logos directory)
+      const logoPath = resolve(__dirname, 'src/assets/logos/Cash Cow logo.png');
       const iconFiles = ['icon16.png', 'icon48.png', 'icon128.png'];
       
       iconFiles.forEach(iconFile => {
         const iconDest = resolve(distDir, iconFile);
         if (existsSync(logoPath)) {
           copyFileSync(logoPath, iconDest);
-          console.log(`✓ Copied ${iconFile} (using Harmony logo)`);
+          console.log(`✓ Copied ${iconFile} (using Cash Cow logo)`);
         }
       });
       
@@ -82,7 +82,7 @@ function copyExtensionFiles() {
           const logosDestDir = resolve(distDir, 'src/assets/logos');
           if (existsSync(logosSrcDir)) {
             mkdirSync(logosDestDir, { recursive: true });
-            const logoFiles = ['harmony logo.png', 'unnamed (1).jpg', 'unnamed (2).jpg', 'unnamed.jpg'];
+            const logoFiles = ['Cash Cow logo.png', 'unnamed (1).jpg', 'unnamed (2).jpg', 'unnamed.jpg'];
             logoFiles.forEach(file => {
               const src = resolve(logosSrcDir, file);
               const dest = resolve(logosDestDir, file);

@@ -28,14 +28,14 @@ export function HarmonyLogo({ className = "", size = 'medium', variant = 'full' 
       return "/src/assets/logos/unnamed.jpg";
     } else {
       // Use white background version for light mode
-      return "/src/assets/logos/harmony logo.png";
+      return "/src/assets/logos/cash-cow-logo.png";
     }
   };
 
   const LogoIcon = () => (
     <img 
       src={getLogoImage()}
-      alt="Harmony Logo"
+      alt="Cash Cow Logo"
       className={`${sizeClasses[size]} ${className}`}
       style={{ objectFit: 'contain' }}
     />
@@ -55,7 +55,7 @@ export function HarmonyLogo({ className = "", size = 'medium', variant = 'full' 
           fontFamily: 'Inter, system-ui, sans-serif'
         }}
       >
-        Harmony
+        Cash Cow
       </span>
     </div>
   );
@@ -65,8 +65,8 @@ export function HarmonyLogo({ className = "", size = 'medium', variant = 'full' 
 export function ExtensionIcon({ className = "" }: { className?: string }) {
   return (
     <img 
-      src="/src/assets/logos/harmony logo.png"
-      alt="Harmony Extension Icon"
+      src="/src/assets/logos/cash-cow-logo.png"
+      alt="Cash Cow Extension Icon"
       className={`w-16 h-16 ${className}`}
       style={{ objectFit: 'contain' }}
     />

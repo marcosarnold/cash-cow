@@ -11,7 +11,7 @@ export default defineConfig({
       output: {
         entryFileNames: 'index.js',
         format: 'iife',
-        name: 'HarmonyContentScript',
+        name: 'CashCowContentScript',
       },
     },
   },

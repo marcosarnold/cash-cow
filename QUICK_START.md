@@ -11,7 +11,7 @@
 
 Open PowerShell and run:
 ```powershell
-cd C:\Users\User\Desktop\template\harmony-main
+cd C:\Users\User\Desktop\template\Cash Cow-main
 python simple_agent.py
 ```
 
@@ -28,9 +28,9 @@ python simple_agent.py
 ## 🚀 Step 2: Load Extension in Chrome
 
 1. Go to `chrome://extensions/`
-2. Remove old Harmony extension
+2. Remove old Cash Cow extension
 3. Click "Load unpacked"
-4. Select: `C:\Users\User\Desktop\template\harmony-main\dist`
+4. Select: `C:\Users\User\Desktop\template\Cash Cow-main\dist`
 5. ✅ Extension loaded!
 
 ---
@@ -41,7 +41,7 @@ python simple_agent.py
 
 1. Go to **amazon.com**
 2. Add items to cart
-3. **Click Harmony extension icon**
+3. **Click Cash Cow extension icon**
 4. **Popup opens** showing:
    - Current merchant: Amazon
    - Amount: Your cart total
@@ -52,7 +52,7 @@ python simple_agent.py
 
 1. Go to **ubereats.com**
 2. Add food to cart
-3. **Click Harmony extension icon**
+3. **Click Cash Cow extension icon**
 4. **Popup opens** showing:
    - Best card: **Amex Gold** (4x points!)
    - Why: "Earns 4× rewards on dining"

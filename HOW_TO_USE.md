@@ -12,8 +12,8 @@
 ## 🚀 Load Extension:
 
 1. **Chrome** → `chrome://extensions/`
-2. **Remove** old Harmony extension
-3. **Load unpacked** → Select `C:\Users\User\Desktop\template\harmony-main\dist`
+2. **Remove** old Cash Cow extension
+3. **Load unpacked** → Select `C:\Users\User\Desktop\template\Cash Cow-main\dist`
 4. **DONE!**
 
 ---

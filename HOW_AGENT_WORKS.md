@@ -3,7 +3,7 @@
 ## The Flow:
 
 ### Step 1: Popup Opens
-When you click the Harmony icon, the extension calls:
+When you click the Cash Cow icon, the extension calls:
 ```
 POST http://localhost:8080/classify
 Body: { "url": "https://amazon.com" }

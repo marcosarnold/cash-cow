@@ -10,8 +10,8 @@
 ## 🚀 Load Extension Now
 
 1. **Open Chrome** → `chrome://extensions/`
-2. **Click the reload button** on your Harmony extension (or load it if not loaded)
-3. **Select:** `C:\Users\User\Desktop\template\harmony-main\dist`
+2. **Click the reload button** on your Cash Cow extension (or load it if not loaded)
+3. **Select:** `C:\Users\User\Desktop\template\Cash Cow-main\dist`
 
 ✅ Extension should load without errors!
 
@@ -22,7 +22,7 @@
 ### 1. Start the Agent Server (in a terminal)
 
 ```powershell
-cd C:\Users\User\Desktop\template\harmony-main
+cd C:\Users\User\Desktop\template\Cash Cow-main
 python simple_agent.py
 ```
 
@@ -36,7 +36,7 @@ Keep this running!
 1. Go to `amazon.com`
 2. Add item to cart
 3. View cart
-4. **Look for Harmony overlay** (bottom-right)
+4. **Look for Cash Cow overlay** (bottom-right)
 
 **Or try Uber Eats:**
 1. Go to `ubereats.com`

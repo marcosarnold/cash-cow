@@ -11,7 +11,7 @@ The AI agent server is now running on `http://localhost:8080`
 1. **Open Chrome** → `chrome://extensions/`
 2. **Enable Developer mode** (toggle top-right)
 3. **Click "Load unpacked"**
-4. **Navigate to:** `C:\Users\User\Desktop\template\harmony-main\dist`
+4. **Navigate to:** `C:\Users\User\Desktop\template\Cash Cow-main\dist`
 5. **Select the dist folder**
 
 ---
@@ -23,7 +23,7 @@ The AI agent server is now running on `http://localhost:8080`
 1. Go to `amazon.com`
 2. Add an item to cart
 3. View cart or proceed to checkout
-4. **Look for Harmony overlay!** (bottom-right)
+4. **Look for Cash Cow overlay!** (bottom-right)
 
 **You'll see:**
 - ✅ Real merchant: "Amazon"

@@ -1,6 +1,6 @@
 {
   "manifest_version": 3,
-  "name": "Harmony - Smart Credit Card Rewards",
+  "name": "Cash Cow - Smart Credit Card Rewards",
   "version": "1.0.0",
   "description": "Find the best credit card for every online purchase in real time",
   "permissions": [
@@ -15,7 +15,7 @@
         "default": "Ctrl+Shift+H",
         "mac": "Command+Shift+H"
       },
-      "description": "Open Harmony recommendations"
+      "description": "Open Cash Cow recommendations"
     }
   },
   "host_permissions": [

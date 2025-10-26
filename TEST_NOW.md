@@ -10,7 +10,7 @@ I've started the AI agent server on `http://localhost:8080` with your Anthropic 
 1. **Open Chrome** → `chrome://extensions/`
 2. **Enable "Developer mode"** (toggle top right)
 3. **Click "Load unpacked"**
-4. **Navigate to:** `C:\Users\User\Desktop\template\harmony-main\dist`
+4. **Navigate to:** `C:\Users\User\Desktop\template\Cash Cow-main\dist`
 5. **Select the `dist` folder**
 
 ✅ Extension loaded!
@@ -24,7 +24,7 @@ I've started the AI agent server on `http://localhost:8080` with your Anthropic 
 1. Go to `amazon.com`
 2. Add an item to cart
 3. Go to checkout/cart page
-4. **Look for the Harmony overlay** (bottom right)
+4. **Look for the Cash Cow overlay** (bottom right)
 
 **What you should see:**
 - ✅ Real merchant name: "Amazon"
@@ -103,8 +103,8 @@ Open DevTools (F12) → Console tab
 
 **Look for:**
 ```
-✓ Harmony: Transaction detected
-✓ Harmony: Recommendation generated
+✓ Cash Cow: Transaction detected
+✓ Cash Cow: Recommendation generated
 ✓ Fetch.AI agent classification: E-COMMERCE
 ```
 

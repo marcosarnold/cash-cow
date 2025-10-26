@@ -39,7 +39,7 @@
 
 ```powershell
 # 1. Start the agent
-cd C:\Users\User\Desktop\template\harmony-main
+cd C:\Users\User\Desktop\template\Cash Cow-main
 .\start_agent.ps1
 
 # 2. In another window (keep agent running):
@@ -56,7 +56,7 @@ cd C:\Users\User\Desktop\template\harmony-main
 
 **Load this folder in Chrome:**
 ```
-C:\Users\User\Desktop\template\harmony-main\dist
+C:\Users\User\Desktop\template\Cash Cow-main\dist
 ```
 
 ---

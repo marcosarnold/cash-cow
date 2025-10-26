@@ -13,7 +13,7 @@
 ### 1. Reload Your Extension
 
 1. Go to `chrome://extensions/`
-2. Click the **reload button** on Harmony extension
+2. Click the **reload button** on Cash Cow extension
 3. Extension is now updated!
 
 ### 2. Test on Amazon
@@ -21,7 +21,7 @@
 1. **Go to amazon.com**
 2. **Add an item to your cart** (any item)
 3. **Click "Cart"** (top right)
-4. **Look for the Harmony overlay** (bottom-right corner)
+4. **Look for the Cash Cow overlay** (bottom-right corner)
 
 ### 3. What You Should See
 
@@ -56,8 +56,8 @@ The extension uses **40+ real credit cards** including:
 
 ✅ **Good:**
 ```
-✓ Harmony: Transaction detected
-✓ Harmony: Recommendation generated
+✓ Cash Cow: Transaction detected
+✓ Cash Cow: Recommendation generated
 ```
 
 ❌ **If you see errors:**

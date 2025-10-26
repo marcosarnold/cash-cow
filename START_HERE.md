@@ -10,19 +10,19 @@ Your extension is built and ready to test. All mocks have been removed!
 
 **Option A - PowerShell Script (Easiest):**
 ```powershell
-cd C:\Users\User\Desktop\template\harmony-main
+cd C:\Users\User\Desktop\template\Cash Cow-main
 .\start_agent.ps1
 ```
 
 **Option B - Manual:**
 ```powershell
-cd C:\Users\User\Desktop\template\harmony-main
+cd C:\Users\User\Desktop\template\Cash Cow-main
 python agent_smart.py
 ```
 
 You should see:
 ```
-🚀 Starting Harmony AI Agent Server...
+🚀 Starting Cash Cow AI Agent Server...
 📡 Listening on http://localhost:8080
 ```
 
@@ -35,7 +35,7 @@ You should see:
 1. Open Chrome → `chrome://extensions/`
 2. Enable **"Developer mode"** (toggle top-right)
 3. Click **"Load unpacked"**
-4. Navigate to: `C:\Users\User\Desktop\template\harmony-main\dist`
+4. Navigate to: `C:\Users\User\Desktop\template\Cash Cow-main\dist`
 5. Click **"Select Folder"**
 
 ✅ Extension is now loaded!
@@ -49,7 +49,7 @@ You should see:
 1. Go to `amazon.com`
 2. Add something to cart
 3. Click "Cart" or go to checkout
-4. **Look for the Harmony overlay!** (bottom-right corner)
+4. **Look for the Cash Cow overlay!** (bottom-right corner)
 
 **What you'll see:**
 - ✅ Real merchant: "Amazon"
@@ -116,8 +116,8 @@ You should see:
 Open DevTools (F12) → Console
 
 Look for:
-- ✅ `Harmony: Transaction detected`
-- ✅ `Harmony: Recommendation generated`
+- ✅ `Cash Cow: Transaction detected`
+- ✅ `Cash Cow: Recommendation generated`
 - ✅ `Fetch.AI agent classification: E-COMMERCE`
 
 ---

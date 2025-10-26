@@ -12,12 +12,12 @@
 
 ### Step 1: Remove Old Extension
 1. Go to `chrome://extensions/`
-2. Find "Harmony - Smart Credit Card Rewards"
+2. Find "Cash Cow - Smart Credit Card Rewards"
 3. Click **"Remove"** button
 
 ### Step 2: Load Fresh Extension
 1. Click **"Load unpacked"**
-2. Navigate to: `C:\Users\User\Desktop\template\harmony-main\dist`
+2. Navigate to: `C:\Users\User\Desktop\template\Cash Cow-main\dist`
 3. Click **"Select Folder"**
 
 ✅ Extension should load without errors!
@@ -29,7 +29,7 @@
 1. Go to **amazon.com**
 2. Add an item to cart
 3. Click **"Cart"** (top right)
-4. **Look for Harmony overlay** (bottom-right corner)
+4. **Look for Cash Cow overlay** (bottom-right corner)
 
 ---
 

@@ -1,7 +1,7 @@
 # Fetch.AI Agent Setup Guide
 
 ## Overview
-This guide shows you how to integrate the Fetch.AI agent for smart merchant classification into your Harmony extension.
+This guide shows you how to integrate the Fetch.AI agent for smart merchant classification into your Cash Cow extension.
 
 ## Step 1: Install Dependencies
 

@@ -13,9 +13,9 @@
 ## 🚀 Load Extension NOW
 
 1. Go to `chrome://extensions/`
-2. **Remove** old Harmony extension
+2. **Remove** old Cash Cow extension
 3. Click **"Load unpacked"**
-4. Select: `C:\Users\User\Desktop\template\harmony-main\dist`
+4. Select: `C:\Users\User\Desktop\template\Cash Cow-main\dist`
 5. **DONE!**
 
 ---
@@ -25,7 +25,7 @@
 ### Click the Extension Icon
 
 1. **Go to Amazon.com**
-2. **Click the Harmony extension icon** in the toolbar
+2. **Click the Cash Cow extension icon** in the toolbar
 3. **Popup opens** (drops down from the icon)
 4. Shows:
    - ✅ Current merchant (Amazon)

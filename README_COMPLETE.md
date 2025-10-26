@@ -31,7 +31,7 @@
 
 ### 1. Load Extension
 1. Chrome → `chrome://extensions/`
-2. Remove old Harmony
+2. Remove old Cash Cow
 3. Load unpacked → `dist` folder
 
 ### 2. Test on Amazon
