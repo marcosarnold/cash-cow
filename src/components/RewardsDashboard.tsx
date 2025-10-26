@@ -1,4 +1,4 @@
-import { ArrowLeft, TrendingUp, Sparkles } from "lucide-react";
+import { ArrowLeft, TrendingUp } from "lucide-react";
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from "recharts";
 import { useDragScroll } from "./useDragScroll";
 
@@ -146,42 +146,6 @@ export function RewardsDashboard({ onNavigate }: RewardsDashboardProps) {
           </div>
         </div>
 
-        {/* Premium Upgrade CTA */}
-        <div
-          className="rounded-xl p-6 shadow-lg relative overflow-hidden"
-          style={{
-            background: 'linear-gradient(135deg, #F5B841 0%, #F59E0B 100%)',
-          }}
-        >
-          <div className="relative z-10">
-            <div className="flex items-start gap-4 mb-5">
-              <Sparkles className="w-7 h-7 shrink-0" style={{ color: '#0A2540' }} />
-              <div>
-                <h3 style={{ fontSize: '18px', color: '#0A2540', fontWeight: 700, marginBottom: '8px' }}>
-                  Upgrade to Harmony Premium
-                </h3>
-                <p style={{ fontSize: '15px', color: 'rgba(10, 37, 64, 0.8)', lineHeight: '1.5' }}>
-                  Unlock advanced analytics, custom alerts, and priority support
-                </p>
-              </div>
-            </div>
-            <button
-              className="px-6 py-3 rounded-lg shadow-sm hover:shadow-md transition-all"
-              style={{
-                backgroundColor: '#0A2540',
-                color: 'white',
-                fontSize: '15px',
-                fontWeight: 600,
-              }}
-            >
-              Learn More
-            </button>
-          </div>
-          <div
-            className="absolute -right-8 -bottom-8 w-32 h-32 rounded-full"
-            style={{ backgroundColor: 'rgba(255, 255, 255, 0.1)' }}
-          />
-        </div>
       </div>
     </div>
   );

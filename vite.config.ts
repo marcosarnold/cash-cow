@@ -42,14 +42,46 @@ function copyExtensionFiles() {
         }
       });
       
-      // Copy content script CSS
-      const cssSrc = resolve(__dirname, 'src/pages/content/style.css');
-      const cssDest = resolve(distDir, 'src/pages/content/style.css');
-      if (existsSync(cssSrc)) {
-        mkdirSync(resolve(distDir, 'src/pages/content'), { recursive: true });
-        copyFileSync(cssSrc, cssDest);
-        console.log('✓ Copied content script CSS');
-      }
+          // Copy content script CSS
+          const cssSrc = resolve(__dirname, 'src/pages/content/style.css');
+          const cssDest = resolve(distDir, 'src/pages/content/style.css');
+          if (existsSync(cssSrc)) {
+            mkdirSync(resolve(distDir, 'src/pages/content'), { recursive: true });
+            copyFileSync(cssSrc, cssDest);
+            console.log('✓ Copied content script CSS');
+          }
+
+          // Copy card images
+          const cardsSrcDir = resolve(__dirname, 'src/assets/cards');
+          const cardsDestDir = resolve(distDir, 'src/assets/cards');
+          if (existsSync(cardsSrcDir)) {
+            mkdirSync(cardsDestDir, { recursive: true });
+            const cardFiles = ['amexgold.png', 'sapphirecard.png', 'discovercard.png'];
+            cardFiles.forEach(file => {
+              const src = resolve(cardsSrcDir, file);
+              const dest = resolve(cardsDestDir, file);
+              if (existsSync(src)) {
+                copyFileSync(src, dest);
+                console.log(`✓ Copied ${file}`);
+              }
+            });
+          }
+
+          // Copy logo files
+          const logosSrcDir = resolve(__dirname, 'src/assets/logos');
+          const logosDestDir = resolve(distDir, 'src/assets/logos');
+          if (existsSync(logosSrcDir)) {
+            mkdirSync(logosDestDir, { recursive: true });
+            const logoFiles = ['harmony logo.png', 'unnamed (1).jpg', 'unnamed (2).jpg', 'unnamed.jpg'];
+            logoFiles.forEach(file => {
+              const src = resolve(logosSrcDir, file);
+              const dest = resolve(logosDestDir, file);
+              if (existsSync(src)) {
+                copyFileSync(src, dest);
+                console.log(`✓ Copied ${file}`);
+              }
+            });
+          }
     }
   };
 }

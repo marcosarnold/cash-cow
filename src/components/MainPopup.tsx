@@ -14,16 +14,16 @@ const sampleCards: CreditCardData[] = [
     id: "1",
     name: "Amex Gold",
     type: "American Express",
-    last4: "1004",
-    color: "linear-gradient(135deg, #2E5266 0%, #1A3A4A 100%)",
+    last4: "7997",
+    color: "linear-gradient(135deg, #D4AF37 0%, #B8860B 100%)",
     rewardType: "Points",
     network: "amex",
   },
   {
     id: "2",
-    name: "Chase Sapphire",
+    name: "Chase Sapphire Preferred",
     type: "Chase",
-    last4: "5678",
+    last4: "1234",
     color: "linear-gradient(135deg, #1E3A8A 0%, #1E40AF 100%)",
     rewardType: "Points",
     network: "visa",
@@ -32,8 +32,8 @@ const sampleCards: CreditCardData[] = [
     id: "3",
     name: "Discover It",
     type: "Discover",
-    last4: "9012",
-    color: "linear-gradient(135deg, #F97316 0%, #EA580C 100%)",
+    last4: "5678",
+    color: "linear-gradient(135deg, #8B0000 0%, #A0522D 100%)",
     rewardType: "Cashback",
     network: "discover",
   },
@@ -59,7 +59,7 @@ export function MainPopup({ onNavigate }: MainPopupProps) {
   const isOptimal = currentCardIndex === optimalCardIndex;
 
   return (
-    <div className="h-full flex flex-col overflow-hidden" style={{ background: `linear-gradient(to bottom, ${colors.bg.primary} 0%, ${colors.bg.secondary} 100%)` }}>
+    <div className="h-full flex flex-col overflow-hidden rounded-lg" style={{ background: `linear-gradient(to bottom, ${colors.bg.primary} 0%, ${colors.bg.secondary} 100%)`, borderRadius: '12px' }}>
       {/* Header */}
       <div className="flex items-center justify-between px-6 py-4 shadow-sm border-b shrink-0" style={{ backgroundColor: colors.bg.card, borderColor: colors.border.default }}>
         <HarmonyLogo size="medium" />

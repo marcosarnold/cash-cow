@@ -43,29 +43,29 @@ export function CardCarousel({ cards, optimalCardIndex, nonOptimalReasons, onCar
         {/* Navigation Arrows */}
         <button
           onClick={handlePrev}
-          className="absolute top-1/2 left-2 z-30 w-10 h-10 rounded-full shadow-xl flex items-center justify-center hover:scale-110 hover:shadow-2xl transition-all duration-300"
+          className="absolute left-2 z-30 w-8 h-8 rounded-full shadow-xl flex items-center justify-center hover:scale-110 hover:shadow-2xl transition-all duration-300"
           style={{ 
             backgroundColor: 'white', 
             border: `2px solid ${colors.border.default}`,
-            transform: 'translateY(-50%)',
+            top: 'calc(50% - 20px)',
             boxShadow: '0 8px 25px rgba(0, 0, 0, 0.15)',
             left: 0,
           }}
         >
-          <ChevronLeft className="w-5 h-5" style={{ color: colors.text.primary }} />
+          <ChevronLeft className="w-4 h-4" style={{ color: colors.text.primary }} />
         </button>
 
         <button
           onClick={handleNext}
-          className="absolute top-1/2 right-2 z-30 w-10 h-10 rounded-full shadow-xl flex items-center justify-center hover:scale-110 hover:shadow-2xl transition-all duration-300"
+          className="absolute right-2 z-30 w-8 h-8 rounded-full shadow-xl flex items-center justify-center hover:scale-110 hover:shadow-2xl transition-all duration-300"
           style={{ 
             backgroundColor: 'white', 
             border: `2px solid ${colors.border.default}`,
-            transform: 'translateY(-50%)',
+            top: 'calc(50% - 20px)',
             boxShadow: '0 8px 25px rgba(0, 0, 0, 0.15)',
           }}
         >
-          <ChevronRight className="w-5 h-5" style={{ color: colors.text.primary }} />
+          <ChevronRight className="w-4 h-4" style={{ color: colors.text.primary }} />
         </button>
 
         {/* Cards Container - All visible */}

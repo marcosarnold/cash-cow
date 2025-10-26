@@ -14,14 +14,9 @@ interface CardItem {
 }
 
 const initialCards: CardItem[] = [
-  { id: "1", name: "Amex Gold", rewardType: "Points", last4: "1004" },
-  { id: "2", name: "Chase Sapphire", rewardType: "Points", last4: "5678" },
-  { id: "3", name: "Discover It", rewardType: "Cashback", last4: "9012" },
-  { id: "4", name: "Capital One Venture", rewardType: "Miles", last4: "3456" },
-  { id: "5", name: "Citi Double Cash", rewardType: "Cashback", last4: "7890" },
-  { id: "6", name: "Chase Freedom", rewardType: "Cashback", last4: "2468" },
-  { id: "7", name: "Amex Platinum", rewardType: "Points", last4: "1357" },
-  { id: "8", name: "Bank of America Cash", rewardType: "Cashback", last4: "9753" },
+  { id: "1", name: "Amex Gold", rewardType: "Points", last4: "7997" },
+  { id: "2", name: "Chase Sapphire Preferred", rewardType: "Points", last4: "1234" },
+  { id: "3", name: "Discover It", rewardType: "Cashback", last4: "5678" },
 ];
 
 export function ManageCards({ onNavigate }: ManageCardsProps) {

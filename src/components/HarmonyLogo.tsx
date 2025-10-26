@@ -21,48 +21,24 @@ export function HarmonyLogo({ className = "", size = 'medium', variant = 'full' 
     large: 'text-xl'
   };
 
+  // Get the appropriate logo based on theme
+  const getLogoImage = () => {
+    if (theme === 'dark') {
+      // Use blue/dark version for dark mode
+      return "/src/assets/logos/unnamed (1).jpg"; // Adjust filename as needed
+    } else {
+      // Use white background version for light mode
+      return "/src/assets/logos/harmony logo.png";
+    }
+  };
+
   const LogoIcon = () => (
-    <svg 
-      className={`${sizeClasses[size]} ${className}`} 
-      viewBox="0 0 32 32" 
-      fill="none" 
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      {/* Left vertical stroke */}
-      <path
-        d="M8 8V24"
-        stroke={theme === 'dark' ? '#60A5FA' : '#3B82F6'}
-        strokeWidth="2.5"
-        strokeLinecap="round"
-      />
-      
-      {/* Right vertical stroke */}
-      <path
-        d="M24 8V24"
-        stroke={theme === 'dark' ? '#60A5FA' : '#3B82F6'}
-        strokeWidth="2.5"
-        strokeLinecap="round"
-      />
-      
-      {/* Wave horizontal connector */}
-      <path
-        d="M8 16C8 16 10 12 16 16C22 20 24 16 24 16"
-        stroke="url(#waveGradient)"
-        strokeWidth="2.5"
-        strokeLinecap="round"
-        fill="none"
-      />
-      
-      <defs>
-        <linearGradient id="waveGradient" x1="8" y1="16" x2="24" y2="16">
-          <stop offset="0%" stopColor={theme === 'dark' ? '#60A5FA' : '#3B82F6'} />
-          <stop offset="25%" stopColor={theme === 'dark' ? '#3B82F6' : '#1D4ED8'} />
-          <stop offset="50%" stopColor={theme === 'dark' ? '#1D4ED8' : '#1E40AF'} />
-          <stop offset="75%" stopColor={theme === 'dark' ? '#1E40AF' : '#1E3A8A'} />
-          <stop offset="100%" stopColor={theme === 'dark' ? '#1E3A8A' : '#172554'} />
-        </linearGradient>
-      </defs>
-    </svg>
+    <img 
+      src={getLogoImage()}
+      alt="Harmony Logo"
+      className={`${sizeClasses[size]} ${className}`}
+      style={{ objectFit: 'contain' }}
+    />
   );
 
   if (variant === 'icon-only') {
@@ -88,52 +64,11 @@ export function HarmonyLogo({ className = "", size = 'medium', variant = 'full' 
 // Extension icon component for Chrome toolbar
 export function ExtensionIcon({ className = "" }: { className?: string }) {
   return (
-    <svg 
-      className={`w-16 h-16 ${className}`} 
-      viewBox="0 0 32 32" 
-      fill="none" 
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      {/* Background circle */}
-      <circle
-        cx="16"
-        cy="16"
-        r="15"
-        fill="#F5B841"
-        stroke="#F59E0B"
-        strokeWidth="2"
-      />
-      
-      {/* H logo */}
-      <path
-        d="M8 8V24"
-        stroke="#0A2540"
-        strokeWidth="2.5"
-        strokeLinecap="round"
-      />
-      <path
-        d="M24 8V24"
-        stroke="#0A2540"
-        strokeWidth="2.5"
-        strokeLinecap="round"
-      />
-      <path
-        d="M8 16C8 16 10 12 16 16C22 20 24 16 24 16"
-        stroke="url(#extensionGradient)"
-        strokeWidth="2.5"
-        strokeLinecap="round"
-        fill="none"
-      />
-      
-      <defs>
-        <linearGradient id="extensionGradient" x1="8" y1="16" x2="24" y2="16">
-          <stop offset="0%" stopColor="#0A2540" />
-          <stop offset="25%" stopColor="#1E3A8A" />
-          <stop offset="50%" stopColor="#1D4ED8" />
-          <stop offset="75%" stopColor="#3B82F6" />
-          <stop offset="100%" stopColor="#60A5FA" />
-        </linearGradient>
-      </defs>
-    </svg>
+    <img 
+      src="/src/assets/logos/harmony logo.png"
+      alt="Harmony Extension Icon"
+      className={`w-16 h-16 ${className}`}
+      style={{ objectFit: 'contain' }}
+    />
   );
 }
