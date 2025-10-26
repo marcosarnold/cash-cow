@@ -1,4 +1,4 @@
-import { Settings, TrendingUp, X, Sparkles, Moon, Sun, DollarSign } from "lucide-react";
+import { Settings, TrendingUp, X, Sparkles, DollarSign } from "lucide-react";
 import { useState, useEffect } from "react";
 import { HarmonyLogo } from "./HarmonyLogo";
 import { CardCarousel } from "./CardCarousel";
@@ -157,7 +157,7 @@ export function MainPopup({ onNavigate, tabInfo }: MainPopupProps) {
   const [transactionContext, setTransactionContext] = useState<TransactionContext | null>(null);
   const [bestCard, setBestCard] = useState({ index: 0, reason: '', nonOptimal: {} as Record<string, string>, orderedCards: sampleCards });
   const [displayCards, setDisplayCards] = useState(sampleCards);
-  const { theme, toggleTheme } = useTheme();
+  const { theme } = useTheme();
   const colors = getThemeColors(theme);
   
   // Calculate best card based on current merchant (using AI or fallback)
@@ -218,17 +218,6 @@ export function MainPopup({ onNavigate, tabInfo }: MainPopupProps) {
       <div className="flex items-center justify-between px-6 py-4 shadow-sm border-b shrink-0" style={{ backgroundColor: colors.bg.card, borderColor: colors.border.default }}>
         <HarmonyLogo size="medium" variant="icon-only" />
         <div className="flex items-center gap-2">
-          <button
-            onClick={toggleTheme}
-            className="w-10 h-10 rounded-full hover:scale-105 flex items-center justify-center transition-all duration-200"
-            style={{ backgroundColor: theme === 'dark' ? colors.bg.elevated : colors.bg.primary }}
-          >
-            {theme === 'light' ? (
-              <Moon className="w-5 h-5" style={{ color: colors.text.primary }} />
-            ) : (
-              <Sun className="w-5 h-5" style={{ color: colors.accent.gold }} />
-            )}
-          </button>
           <button
             onClick={() => onNavigate("settings")}
             className="w-10 h-10 rounded-full hover:scale-105 flex items-center justify-center transition-all duration-200"
