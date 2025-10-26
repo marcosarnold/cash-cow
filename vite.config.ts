@@ -2,6 +2,9 @@ import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 import { resolve } from 'path';
 import { copyFileSync, existsSync, mkdirSync } from 'fs';
+import { fileURLToPath, URL } from 'url';
+
+const __dirname = fileURLToPath(new URL('.', import.meta.url));
 
 // Plugin to copy manifest and other extension files
 function copyExtensionFiles() {
@@ -59,15 +62,11 @@ export default defineConfig({
       input: {
         popup: resolve(__dirname, 'popup.html'),
         background: resolve(__dirname, 'src/pages/background/index.ts'),
-        content: resolve(__dirname, 'src/pages/content/index.tsx'),
       },
       output: {
         entryFileNames: (chunkInfo) => {
           if (chunkInfo.name === 'background') {
             return 'src/pages/background/index.js';
-          }
-          if (chunkInfo.name === 'content') {
-            return 'src/pages/content/index.js';
           }
           return 'assets/[name].js';
         },

@@ -152,27 +152,5 @@ chrome.runtime.onInstalled.addListener((details) => {
   });
 });
 
-// Handle tab updates to inject content script
-chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
-  if (changeInfo.status === 'complete' && tab.url) {
-    const url = new URL(tab.url);
-    const hostname = url.hostname.toLowerCase().replace(/^www\./, '');
-    
-    // Check if this is a supported domain
-    chrome.storage.sync.get(['enabledDomains'], (result) => {
-      const enabledDomains = result.enabledDomains || [];
-      
-      if (enabledDomains.includes(hostname)) {
-        // Inject content script
-        chrome.scripting.executeScript({
-          target: { tabId },
-          files: ['src/pages/content/index.tsx']
-        }).catch((error) => {
-          console.warn('Harmony: Could not inject content script:', error);
-        });
-      }
-    });
-  }
-});
 
 console.log('Harmony background script loaded');
