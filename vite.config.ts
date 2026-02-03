@@ -23,18 +23,18 @@ function copyExtensionFiles() {
       const manifestDest = resolve(distDir, 'manifest.json');
       if (existsSync(manifestSrc)) {
         copyFileSync(manifestSrc, manifestDest);
-        console.log('✓ Copied manifest.json');
+        console.log('Copied manifest.json');
       }
-      
+
       // Copy icons (use Cash Cow logo from logos directory)
       const logoPath = resolve(__dirname, 'src/assets/logos/Cash Cow logo.png');
       const iconFiles = ['icon16.png', 'icon48.png', 'icon128.png'];
-      
+
       iconFiles.forEach(iconFile => {
         const iconDest = resolve(distDir, iconFile);
         if (existsSync(logoPath)) {
           copyFileSync(logoPath, iconDest);
-          console.log(`✓ Copied ${iconFile} (using Cash Cow logo)`);
+          console.log(`Copied ${iconFile} (using Cash Cow logo)`);
         }
       });
       
@@ -44,7 +44,7 @@ function copyExtensionFiles() {
           if (existsSync(cssSrc)) {
             mkdirSync(resolve(distDir, 'src/pages/content'), { recursive: true });
             copyFileSync(cssSrc, cssDest);
-            console.log('✓ Copied content script CSS');
+            console.log('Copied content script CSS');
           }
 
           // Copy content script (amazon-amount.js)
@@ -52,13 +52,13 @@ function copyExtensionFiles() {
           if (!existsSync(contentScriptsDir)) {
             mkdirSync(contentScriptsDir, { recursive: true });
           }
-          
+
           const contentScript = 'amazon-amount.js';
           const scriptSrc = resolve(__dirname, 'src/pages/content', contentScript);
           const scriptDest = resolve(contentScriptsDir, contentScript);
           if (existsSync(scriptSrc)) {
             copyFileSync(scriptSrc, scriptDest);
-            console.log(`✓ Copied ${contentScript}`);
+            console.log(`Copied ${contentScript}`);
           }
 
           // Copy card images
@@ -72,7 +72,7 @@ function copyExtensionFiles() {
               const dest = resolve(cardsDestDir, file);
               if (existsSync(src)) {
                 copyFileSync(src, dest);
-                console.log(`✓ Copied ${file}`);
+                console.log(`Copied ${file}`);
               }
             });
           }
@@ -82,13 +82,13 @@ function copyExtensionFiles() {
           const logosDestDir = resolve(distDir, 'src/assets/logos');
           if (existsSync(logosSrcDir)) {
             mkdirSync(logosDestDir, { recursive: true });
-            const logoFiles = ['Cash Cow logo.png', 'unnamed (1).jpg', 'unnamed (2).jpg', 'unnamed.jpg'];
+            const logoFiles = ['Cash Cow logo.png', 'cash-cow-logo.png', 'cashcow typography logo.png', 'entire logo.png'];
             logoFiles.forEach(file => {
               const src = resolve(logosSrcDir, file);
               const dest = resolve(logosDestDir, file);
               if (existsSync(src)) {
                 copyFileSync(src, dest);
-                console.log(`✓ Copied ${file}`);
+                console.log(`Copied ${file}`);
               }
             });
           }
@@ -100,7 +100,7 @@ function copyExtensionFiles() {
           if (existsSync(jsonSrc)) {
             mkdirSync(jsonDestDir, { recursive: true });
             copyFileSync(jsonSrc, jsonDest);
-            console.log(`✓ Copied credit_card_rewards.json`);
+            console.log(`Copied credit_card_rewards.json`);
           }
     }
   };

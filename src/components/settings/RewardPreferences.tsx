@@ -39,11 +39,11 @@ export function RewardPreferences({ onNavigate }: RewardPreferencesProps) {
     if (draggedItem && draggedItem !== id) {
       const draggedIndex = preferences.findIndex((p) => p.id === draggedItem);
       const targetIndex = preferences.findIndex((p) => p.id === id);
-      
+
       const newPreferences = [...preferences];
       const [removed] = newPreferences.splice(draggedIndex, 1);
       newPreferences.splice(targetIndex, 0, removed);
-      
+
       setPreferences(newPreferences.map((p, i) => ({ ...p, order: i + 1 })));
     }
   };
@@ -73,7 +73,7 @@ export function RewardPreferences({ onNavigate }: RewardPreferencesProps) {
       <div className="flex-1 overflow-y-auto px-6 py-6 space-y-6">
         {/* Description */}
         <p style={{ fontSize: '14px', color: '#6B7280', lineHeight: '1.5' }}>
-          Set your reward preferences and drag to reorder them by priority. Harmony will prioritize cards based on your preferences.
+          Set your reward preferences and drag to reorder them by priority. Cash Cow will prioritize cards based on your preferences.
         </p>
 
         {/* Preference List */}
@@ -92,7 +92,7 @@ export function RewardPreferences({ onNavigate }: RewardPreferencesProps) {
               }}
             >
               <GripVertical className="w-5 h-5 shrink-0" style={{ color: '#9CA3AF' }} />
-              
+
               <div className="flex-1">
                 <div className="flex items-center gap-2">
                   <span
@@ -135,7 +135,7 @@ export function RewardPreferences({ onNavigate }: RewardPreferencesProps) {
             style={{ backgroundColor: '#EFF6FF' }}
           >
             <p style={{ fontSize: '13px', color: '#0A2540', lineHeight: '1.5' }}>
-              💡 <span style={{ fontWeight: 600 }}>Tip:</span> Drag preferences to change priority. Harmony will recommend cards based on your top preference first.
+              <span style={{ fontWeight: 600 }}>Tip:</span> Drag preferences to change priority. Cash Cow will recommend cards based on your top preference first.
             </p>
           </div>
         </div>

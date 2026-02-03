@@ -55,21 +55,21 @@ export function ChipIcon({ className = "" }: { className?: string }) {
       <line x1="20" y1="2" x2="20" y2="8" stroke="white" strokeOpacity="0.3" strokeWidth="1"/>
       <line x1="25" y1="2" x2="25" y2="8" stroke="white" strokeOpacity="0.3" strokeWidth="1"/>
       <line x1="30" y1="2" x2="30" y2="8" stroke="white" strokeOpacity="0.3" strokeWidth="1"/>
-      
+
       <line x1="10" y1="22" x2="10" y2="28" stroke="white" strokeOpacity="0.3" strokeWidth="1"/>
       <line x1="15" y1="22" x2="15" y2="28" stroke="white" strokeOpacity="0.3" strokeWidth="1"/>
       <line x1="20" y1="22" x2="20" y2="28" stroke="white" strokeOpacity="0.3" strokeWidth="1"/>
       <line x1="25" y1="22" x2="25" y2="28" stroke="white" strokeOpacity="0.3" strokeWidth="1"/>
       <line x1="30" y1="22" x2="30" y2="28" stroke="white" strokeOpacity="0.3" strokeWidth="1"/>
-      
+
       <line x1="2" y1="10" x2="8" y2="10" stroke="white" strokeOpacity="0.3" strokeWidth="1"/>
       <line x1="2" y1="15" x2="8" y2="15" stroke="white" strokeOpacity="0.3" strokeWidth="1"/>
       <line x1="2" y1="20" x2="8" y2="20" stroke="white" strokeOpacity="0.3" strokeWidth="1"/>
-      
+
       <line x1="32" y1="10" x2="38" y2="10" stroke="white" strokeOpacity="0.3" strokeWidth="1"/>
       <line x1="32" y1="15" x2="38" y2="15" stroke="white" strokeOpacity="0.3" strokeWidth="1"/>
       <line x1="32" y1="20" x2="38" y2="20" stroke="white" strokeOpacity="0.3" strokeWidth="1"/>
-      
+
       <defs>
         <linearGradient id="chipGradient" x1="0" y1="0" x2="40" y2="30">
           <stop stopColor="#FFD700" stopOpacity="0.9"/>
@@ -79,6 +79,3 @@ export function ChipIcon({ className = "" }: { className?: string }) {
     </svg>
   );
 }
-
-
-

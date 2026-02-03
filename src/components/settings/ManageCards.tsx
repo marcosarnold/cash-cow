@@ -1,6 +1,6 @@
 import { ArrowLeft, Edit2, Trash2, Plus } from "lucide-react";
 import { useState } from "react";
-import { useDragScroll } from "./useDragScroll";
+import { useDragScroll } from "../ui/useDragScroll";
 
 interface ManageCardsProps {
   onNavigate: (screen: string) => void;
@@ -28,7 +28,7 @@ export function ManageCards({ onNavigate }: ManageCardsProps) {
     rewardType: "",
     last4: "",
   });
-  
+
   const scrollRef = useDragScroll<HTMLDivElement>();
 
   const handleAddCard = () => {
@@ -127,7 +127,7 @@ export function ManageCards({ onNavigate }: ManageCardsProps) {
             <p className="text-sm mb-4" style={{ color: '#6B7280' }}>
               Add a new card to your account to track rewards and transactions.
             </p>
-            
+
             <div className="space-y-4">
               <div>
                 <label className="block text-sm font-medium mb-1" style={{ color: '#0A2540' }}>Card Name</label>
@@ -140,7 +140,7 @@ export function ManageCards({ onNavigate }: ManageCardsProps) {
                   style={{ borderColor: '#E5E7EB' }}
                 />
               </div>
-              
+
               <div>
                 <label className="block text-sm font-medium mb-1" style={{ color: '#0A2540' }}>Card Type</label>
                 <input
@@ -152,7 +152,7 @@ export function ManageCards({ onNavigate }: ManageCardsProps) {
                   style={{ borderColor: '#E5E7EB' }}
                 />
               </div>
-              
+
               <div>
                 <label className="block text-sm font-medium mb-1" style={{ color: '#0A2540' }}>Reward Type</label>
                 <select
@@ -167,7 +167,7 @@ export function ManageCards({ onNavigate }: ManageCardsProps) {
                   <option value="Miles">Miles</option>
                 </select>
               </div>
-              
+
               <div>
                 <label className="block text-sm font-medium mb-1" style={{ color: '#0A2540' }}>Last 4 Digits</label>
                 <input
@@ -181,7 +181,7 @@ export function ManageCards({ onNavigate }: ManageCardsProps) {
                 />
               </div>
             </div>
-            
+
             <div className="flex gap-3 mt-6">
               <button
                 onClick={() => setIsModalOpen(false)}
@@ -204,6 +204,3 @@ export function ManageCards({ onNavigate }: ManageCardsProps) {
     </div>
   );
 }
-
-
-

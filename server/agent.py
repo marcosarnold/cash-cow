@@ -1,7 +1,6 @@
 """
-Fetch.AI Agent for Harmony Extension
-Uses Claude AI for merchant classification
-Simplified to avoid pydantic compatibility issues
+Cash Cow Agent - Merchant Classification Service
+Uses Claude AI for intelligent merchant classification
 """
 import os
 from dotenv import load_dotenv
@@ -63,11 +62,11 @@ def classify_with_claude(domain: str, merchant_name: str) -> str:
     try:
         api_key = os.getenv('ANTHROPIC_API_KEY')
         if not api_key:
-            print("⚠️  ANTHROPIC_API_KEY not set")
+            print("  ANTHROPIC_API_KEY not set")
             return "OTHER"
-        
+
         client = Anthropic(api_key=api_key)
-        
+
         prompt = f"""Classify the merchant '{merchant_name}' (domain: {domain}) into ONE category:
 - TRAVEL (airlines, hotels, booking)
 - DINING (restaurants, food delivery: Uber Eats, DoorDash, Grubhub)
@@ -86,35 +85,35 @@ Respond with ONLY the category name."""
             max_tokens=50,
             messages=[{"role": "user", "content": prompt}]
         )
-        
+
         category = response.content[0].text.strip().upper()
         valid = ["TRAVEL", "ENTERTAINMENT", "E-COMMERCE", "DINING", "GROCERIES", "GAS", "ONLINE", "FINANCE", "UTILITIES", "OTHER"]
-        
+
         if category not in valid:
             category = "OTHER"
-        
+
         return category
-        
+
     except Exception as e:
-        print(f"❌ Claude error: {e}")
+        print(f"Claude error: {e}")
         return "OTHER"
 
 @app.post("/classify")
 async def classify_merchant(request: ClassifyRequest) -> ClassifyResponse:
-    """Fetch.AI Agent classification endpoint"""
-    print(f"🔄 Fetch.AI Agent received: {request.url}")
-    
+    """Cash Cow Agent classification endpoint"""
+    print(f"Cash Cow Agent received: {request.url}")
+
     # Extract domain
     domain = extract_domain(request.url)
     merchant_name = get_merchant_name(domain)
-    
+
     # Classify with Claude AI
     category = classify_with_claude(domain, merchant_name)
-    
-    print(f"📦 Domain: {domain}")
-    print(f"🏪 Merchant: {merchant_name}")
-    print(f"🤖 Category: {category}")
-    
+
+    print(f"Domain: {domain}")
+    print(f"Merchant: {merchant_name}")
+    print(f"Category: {category}")
+
     return ClassifyResponse(
         domain=domain,
         category=category,
@@ -124,17 +123,16 @@ async def classify_merchant(request: ClassifyRequest) -> ClassifyResponse:
 @app.get("/")
 def root():
     return {
-        "status": "Fetch.AI Agent running with Claude AI",
+        "status": "Cash Cow Agent running with Claude AI",
         "version": "2.0",
         "endpoint": "/classify",
-        "provider": "Fetch.AI + Anthropic Claude"
+        "provider": "Anthropic Claude"
     }
 
 if __name__ == "__main__":
-    print("\n🤖 Starting Fetch.AI Agent Server...")
-    print("🧠 Powered by: Fetch.AI + Anthropic Claude")
-    print("📡 Endpoint: http://localhost:8080")
-    print("🔗 Chrome extension will connect here\n")
-    
-    uvicorn.run(app, host="0.0.0.0", port=8080)
+    print("\nStarting Cash Cow Agent Server...")
+    print("Powered by: Anthropic Claude")
+    print("Endpoint: http://localhost:8080")
+    print("Chrome extension will connect here\n")
 
+    uvicorn.run(app, host="0.0.0.0", port=8080)

@@ -1,5 +1,5 @@
 import { ArrowLeft, CreditCard, Star, Shield, LogOut, ChevronRight } from "lucide-react";
-import { useDragScroll } from "./useDragScroll";
+import { useDragScroll } from "../ui/useDragScroll";
 
 interface SettingsMenuProps {
   onNavigate: (screen: string) => void;
@@ -28,7 +28,7 @@ const settingsOptions = [
 
 export function SettingsMenu({ onNavigate }: SettingsMenuProps) {
   const scrollRef = useDragScroll<HTMLDivElement>();
-  
+
   return (
     <div className="h-full flex flex-col" style={{ backgroundColor: '#F7F9FB' }}>
       {/* Header */}
@@ -97,6 +97,3 @@ export function SettingsMenu({ onNavigate }: SettingsMenuProps) {
     </div>
   );
 }
-
-
-

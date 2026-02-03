@@ -56,6 +56,3 @@ export function useDragScroll<T extends HTMLElement>() {
 
   return ref;
 }
-
-
-

@@ -1,6 +1,6 @@
 import { ArrowLeft, CheckCircle2, AlertTriangle } from "lucide-react";
 import { useState } from "react";
-import { useDragScroll } from "./useDragScroll";
+import { useDragScroll } from "../ui/useDragScroll";
 
 interface AccountPrivacyProps {
   onNavigate: (screen: string) => void;
@@ -101,7 +101,7 @@ export function AccountPrivacy({ onNavigate }: AccountPrivacyProps) {
           <h3 style={{ fontSize: '15px', color: '#0A2540', fontWeight: 600 }}>
             Privacy Settings
           </h3>
-          
+
           <div className="space-y-3">
             <button className="w-full text-left px-4 py-3 rounded-lg hover:bg-gray-50 transition-colors flex items-center justify-between">
               <span style={{ fontSize: '14px', color: '#0A2540' }}>
@@ -109,14 +109,14 @@ export function AccountPrivacy({ onNavigate }: AccountPrivacyProps) {
               </span>
               <span style={{ fontSize: '13px', color: '#6B7280' }}>→</span>
             </button>
-            
+
             <button className="w-full text-left px-4 py-3 rounded-lg hover:bg-gray-50 transition-colors flex items-center justify-between">
               <span style={{ fontSize: '14px', color: '#0A2540' }}>
                 Privacy Policy
               </span>
               <span style={{ fontSize: '13px', color: '#6B7280' }}>→</span>
             </button>
-            
+
             <button className="w-full text-left px-4 py-3 rounded-lg hover:bg-gray-50 transition-colors flex items-center justify-between">
               <span style={{ fontSize: '14px', color: '#0A2540' }}>
                 Terms of Service
@@ -153,6 +153,3 @@ export function AccountPrivacy({ onNavigate }: AccountPrivacyProps) {
     </div>
   );
 }
-
-
-

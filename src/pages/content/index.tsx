@@ -1,10 +1,10 @@
 import { useState, useEffect } from 'react';
 import ReactDOM from 'react-dom/client';
 import { Sparkles, TrendingUp, X, DollarSign } from 'lucide-react';
-import { HarmonyLogo } from '../../components/HarmonyLogo';
-import { CreditCardDisplay, CreditCardData } from '../../components/CreditCardDisplay';
-import { MinimizedWidget } from '../../components/MinimizedWidget';
-import { ThemeProvider, useTheme, getThemeColors } from '../../components/ThemeContext';
+import { CashCowLogo } from '../../components/ui/CashCowLogo';
+import { CreditCardDisplay, CreditCardData } from '../../components/cards/CreditCardDisplay';
+import { MinimizedWidget } from '../../components/ui/MinimizedWidget';
+import { ThemeProvider, useTheme, getThemeColors } from '../../components/ui/ThemeContext';
 import { getTransactionContext } from './merchant/detect';
 import { CARDS } from '../../lib/rewards/rules';
 import { recommend } from '../../lib/rewards/engine';
@@ -55,12 +55,12 @@ function ContentOverlayInner() {
     const transactionCtx = getTransactionContext();
     
     if (transactionCtx) {
-      console.log('Harmony: Transaction detected', transactionCtx);
+      console.log('Cash Cow: Transaction detected', transactionCtx);
       
       // Get recommendation using the real engine
       try {
         const rec = recommend(transactionCtx, CARDS, []);
-        console.log('Harmony: Recommendation generated', rec);
+        console.log('Cash Cow: Recommendation generated', rec);
         
         setTransaction(transactionCtx);
         setRecommendation({
@@ -71,12 +71,12 @@ function ContentOverlayInner() {
         });
         setIsVisible(true);
       } catch (error) {
-        console.error('Harmony: Error generating recommendation', error);
+        console.error('Cash Cow: Error generating recommendation', error);
         setIsVisible(false);
       }
     } else {
       // No transaction detected - don't show overlay
-      console.log('Harmony: No transaction detected on this page');
+      console.log('Cash Cow: No transaction detected on this page');
       setIsVisible(false);
     }
   }, []);
@@ -109,7 +109,7 @@ function ContentOverlayInner() {
 
       {/* Main Overlay */}
       <div
-        className="harmony-overlay"
+        className="cashcow-overlay"
         style={{
           position: 'fixed',
           bottom: '20px',
@@ -125,7 +125,7 @@ function ContentOverlayInner() {
         // Minimized state - just a small floating button
         <button
           onClick={handleMinimize}
-          className="harmony-minimized-button"
+          className="cashcow-minimized-button"
           style={{
             width: '60px',
             height: '60px',
@@ -145,19 +145,19 @@ function ContentOverlayInner() {
       ) : (
         // Full overlay
         <div
-          className="harmony-overlay-card"
+          className="cashcow-overlay-card"
           style={{
             background: `linear-gradient(to bottom, ${colors.bg.primary} 0%, ${colors.bg.secondary} 100%)`,
             borderRadius: '20px',
             padding: '20px',
             boxShadow: '0 20px 60px -12px rgba(0, 0, 0, 0.25), 0 10px 30px -10px rgba(0, 0, 0, 0.15)',
             border: `1px solid ${colors.border.default}`,
-            animation: 'harmony-slide-in 0.5s ease-out',
+            animation: 'cashcow-slide-in 0.5s ease-out',
           }}
         >
           {/* Header */}
           <div className="flex items-center justify-between mb-4">
-            <HarmonyLogo size="medium" variant="icon-only" />
+            <CashCowLogo size="medium" variant="icon-only" />
             <div className="flex items-center gap-2">
               <button
                 onClick={handleMinimize}
@@ -279,7 +279,7 @@ function ContentOverlayInner() {
 
       <style>
         {`
-          @keyframes harmony-slide-in {
+          @keyframes cashcow-slide-in {
             from {
               transform: translateY(100px);
               opacity: 0;
@@ -290,11 +290,11 @@ function ContentOverlayInner() {
             }
           }
           
-          .harmony-overlay * {
+          .cashcow-overlay * {
             box-sizing: border-box;
           }
           
-          .harmony-minimized-button:hover {
+          .cashcow-minimized-button:hover {
             transform: scale(1.1);
           }
         `}
@@ -307,13 +307,13 @@ function ContentOverlayInner() {
 // Initialize the overlay
 function initOverlay() {
   // Check if overlay already exists
-  if (document.querySelector('.harmony-overlay')) {
+  if (document.querySelector('.cashcow-overlay')) {
     return;
   }
 
   // Create container
   const container = document.createElement('div');
-  container.id = 'harmony-overlay-container';
+  container.id = 'cashcow-overlay-container';
   document.body.appendChild(container);
 
   // Render React component
