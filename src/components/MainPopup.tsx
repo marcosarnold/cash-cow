@@ -1,9 +1,9 @@
 import { Settings, TrendingUp, X, Sparkles, DollarSign } from "lucide-react";
 import { useState, useEffect } from "react";
-import { HarmonyLogo } from "./HarmonyLogo";
-import { CardCarousel } from "./CardCarousel";
-import { CreditCardData } from "./CreditCardDisplay";
-import { useTheme, getThemeColors } from "./ThemeContext";
+import { CashCowLogo } from "./ui/CashCowLogo";
+import { CardCarousel } from "./cards/CardCarousel";
+import { CreditCardData } from "./cards/CreditCardDisplay";
+import { useTheme, getThemeColors } from "./ui/ThemeContext";
 import { TransactionContext } from "../lib/types";
 
 interface MainPopupProps {
@@ -44,7 +44,7 @@ const sampleCards: CreditCardData[] = [
 
 // Calculate best card and order cards by reward maximization
 function getBestCardForCategory(
-  category: string | null, 
+  category: string | null,
   amount: number
 ): { index: number; reason: string; nonOptimal: Record<string, string>; orderedCards: CreditCardData[] } {
   if (!category) category = 'general';
@@ -78,37 +78,37 @@ function getBestCardForCategory(
   };
 
   // Calculate rewards for each card WITH expected value calculation
-  const cardCalculations: Array<{ 
-    card: CreditCardData; 
-    index: number; 
-    rate: number; 
+  const cardCalculations: Array<{
+    card: CreditCardData;
+    index: number;
+    rate: number;
     expectedValue: number;
     name: string;
     reason: string;
   }> = [];
 
-  console.log(`🔢 Calculating rewards for category: ${category}, amount: ${amount}`);
-  
+  console.log(`Calculating rewards for category: ${category}, amount: ${amount}`);
+
   sampleCards.forEach((card, index) => {
     const rate = cardRewards[card.name]?.[category] || 1;
     const expectedValue = amount * rate; // Total points expected
-    
-    console.log(`  💳 ${card.name}: ${rate}× on ${category} = ${expectedValue.toFixed(0)} points`);
-    
+
+    console.log(`  ${card.name}: ${rate}x on ${category} = ${expectedValue.toFixed(0)} points`);
+
     let reason = '';
     if (rate > 1) {
-      reason = `Earns ${rate}× points on ${category} = ${expectedValue.toFixed(0)} points`;
+      reason = `Earns ${rate}x points on ${category} = ${expectedValue.toFixed(0)} points`;
     } else {
-      reason = `Earns ${rate}× points (base rate) = ${expectedValue.toFixed(0)} points`;
+      reason = `Earns ${rate}x points (base rate) = ${expectedValue.toFixed(0)} points`;
     }
-    
-    cardCalculations.push({ 
-      card, 
-      index, 
-      rate, 
-      expectedValue, 
-      name: card.name, 
-      reason 
+
+    cardCalculations.push({
+      card,
+      index,
+      rate,
+      expectedValue,
+      name: card.name,
+      reason
     });
   });
 
@@ -129,14 +129,14 @@ function getBestCardForCategory(
     }
   });
 
-  console.log(`📊 Category: ${category} → Best: ${bestCard.name} (${bestCard.rate}×) = ${bestCard.expectedValue.toFixed(0)} points`);
-  console.log(`📊 Ordered by rewards:`, cardCalculations.map(c => `${c.name}: ${c.expectedValue.toFixed(0)} pts`));
+  console.log(`Category: ${category} -> Best: ${bestCard.name} (${bestCard.rate}x) = ${bestCard.expectedValue.toFixed(0)} points`);
+  console.log(`Ordered by rewards:`, cardCalculations.map(c => `${c.name}: ${c.expectedValue.toFixed(0)} pts`));
 
-  return { 
+  return {
     index: 0, // Best card is always at index 0 after ordering
-    reason: bestCard.reason, 
+    reason: bestCard.reason,
     nonOptimal,
-    orderedCards 
+    orderedCards
   };
 }
 
@@ -159,33 +159,33 @@ export function MainPopup({ onNavigate, tabInfo }: MainPopupProps) {
   const [displayCards, setDisplayCards] = useState(sampleCards);
   const { theme } = useTheme();
   const colors = getThemeColors(theme);
-  
+
   // Calculate best card based on current merchant (using AI or fallback)
   useEffect(() => {
     if (tabInfo?.merchantName) {
       // Use AI category if available, otherwise use category map
       const category = tabInfo.category || categoryMap[tabInfo.merchantName] || 'general';
       const amount = transactionContext?.amount || parseFloat(tabInfo.amount?.replace('$', '') || '0') || 50;
-      
-      console.log('🔍 === RECOMMENDATION DEBUG ===');
-      console.log('🏪 Merchant:', tabInfo.merchantName);
-      console.log('📂 Category (from AI):', tabInfo.category);
-      console.log('📂 Category (fallback):', categoryMap[tabInfo.merchantName]);
-      console.log('📂 Final Category:', category);
-      console.log('💰 Amount:', amount);
-      
+
+      console.log('=== RECOMMENDATION DEBUG ===');
+      console.log('Merchant:', tabInfo.merchantName);
+      console.log('Category (from AI):', tabInfo.category);
+      console.log('Category (fallback):', categoryMap[tabInfo.merchantName]);
+      console.log('Final Category:', category);
+      console.log('Amount:', amount);
+
       const recommendation = getBestCardForCategory(category, amount);
-      console.log('🎯 Best card:', recommendation.orderedCards[0].name);
-      console.log('📝 Reason:', recommendation.reason);
-      console.log('📊 Ordered cards:', recommendation.orderedCards.map(c => c.name).join(' → '));
+      console.log('Best card:', recommendation.orderedCards[0].name);
+      console.log('Reason:', recommendation.reason);
+      console.log('Ordered cards:', recommendation.orderedCards.map(c => c.name).join(' -> '));
       console.log('================================');
-      
+
       setBestCard(recommendation);
       setDisplayCards(recommendation.orderedCards);
       setCurrentCardIndex(0); // Best card is always at index 0 in ordered cards
     }
   }, [tabInfo, transactionContext]);
-  
+
   // Fetch transaction context from Chrome storage
   useEffect(() => {
     const fetchTransactionContext = async () => {
@@ -201,10 +201,10 @@ export function MainPopup({ onNavigate, tabInfo }: MainPopupProps) {
         console.error('Failed to fetch transaction context:', error);
       }
     };
-    
+
     fetchTransactionContext();
   }, []);
-  
+
   const handleClose = () => {
     // In a real Chrome extension, this would close the popup
     window.close();
@@ -216,7 +216,7 @@ export function MainPopup({ onNavigate, tabInfo }: MainPopupProps) {
     <div className="h-full flex flex-col overflow-hidden rounded-lg" style={{ background: `linear-gradient(to bottom, ${colors.bg.primary} 0%, ${colors.bg.secondary} 100%)`, borderRadius: '12px' }}>
       {/* Header */}
       <div className="flex items-center justify-between px-6 py-4 shadow-sm border-b shrink-0" style={{ backgroundColor: colors.bg.card, borderColor: colors.border.default }}>
-        <HarmonyLogo size="medium" variant="icon-only" />
+        <CashCowLogo size="medium" variant="icon-only" />
         <div className="flex items-center gap-2">
           <button
             onClick={() => onNavigate("settings")}
@@ -238,12 +238,12 @@ export function MainPopup({ onNavigate, tabInfo }: MainPopupProps) {
       {/* Main Content */}
       <div className="flex-1 px-3 py-6 space-y-6 overflow-y-auto">
         {/* Current Purchase Context */}
-        <div 
+        <div
           className="rounded-xl p-6 shadow-sm border"
           style={{ backgroundColor: colors.bg.card, borderColor: colors.border.default }}
         >
           <div className="flex items-center gap-4">
-            <div 
+            <div
               className="w-12 h-12 rounded-xl flex items-center justify-center"
               style={{ background: `linear-gradient(135deg, ${colors.accent.gold} 0%, ${colors.accent.goldDark} 100%)` }}
             >
@@ -256,8 +256,8 @@ export function MainPopup({ onNavigate, tabInfo }: MainPopupProps) {
             <div className="text-right">
               <div style={{ fontSize: '13px', color: colors.text.secondary, marginBottom: '3px' }}>Amount</div>
               <div style={{ fontSize: '18px', color: colors.text.primary, fontWeight: 700 }}>{
-                transactionContext?.amount && transactionContext.amount > 0 
-                  ? `$${transactionContext.amount.toFixed(2)}` 
+                transactionContext?.amount && transactionContext.amount > 0
+                  ? `$${transactionContext.amount.toFixed(2)}`
                   : tabInfo?.amount || 'Check page'
               }</div>
             </div>
@@ -270,7 +270,7 @@ export function MainPopup({ onNavigate, tabInfo }: MainPopupProps) {
             <h3 style={{ fontSize: '15px', color: colors.text.primary, fontWeight: 600 }}>
               Your Cards
             </h3>
-            <button 
+            <button
               onClick={() => onNavigate("manage-cards")}
               className="text-sm hover:underline transition-colors"
               style={{ color: colors.accent.gold, fontWeight: 600 }}
@@ -278,7 +278,7 @@ export function MainPopup({ onNavigate, tabInfo }: MainPopupProps) {
               Manage
             </button>
           </div>
-          <CardCarousel 
+          <CardCarousel
             cards={displayCards}
             optimalCardIndex={bestCard.index}
             optimalReason={bestCard.reason}
@@ -289,15 +289,15 @@ export function MainPopup({ onNavigate, tabInfo }: MainPopupProps) {
 
         {/* Best Card Recommendation - Only show when optimal card is selected */}
         {isOptimal && (
-          <div 
+          <div
             className="rounded-xl p-5 shadow-lg border-2"
-            style={{ 
-              background: colors.success.bg, 
-              borderColor: colors.success.border 
+            style={{
+              background: colors.success.bg,
+              borderColor: colors.success.border
             }}
           >
             <div className="flex items-start gap-4">
-              <div 
+              <div
                 className="w-10 h-10 rounded-xl flex items-center justify-center shrink-0"
                 style={{ background: colors.success.icon }}
               >
@@ -315,7 +315,7 @@ export function MainPopup({ onNavigate, tabInfo }: MainPopupProps) {
                 <p style={{ fontSize: '14px', color: colors.success.text, lineHeight: '1.5', marginBottom: '12px' }}>
                   {bestCard.reason}. Maximize your rewards.
                 </p>
-                <div 
+                <div
                   className="px-4 py-3 rounded-xl inline-flex items-center gap-3"
                   style={{ background: theme === 'dark' ? colors.success.badge : 'linear-gradient(135deg, #D1FAE5 0%, #A7F3D0 100%)', border: `1px solid ${colors.success.border}` }}
                 >

@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { ChevronLeft, ChevronRight, AlertCircle, ArrowRight, Sparkles } from "lucide-react";
 import { CreditCardDisplay, CreditCardData } from "./CreditCardDisplay";
-import { useTheme, getThemeColors } from "./ThemeContext";
+import { useTheme, getThemeColors } from "../ui/ThemeContext";
 
 interface CardCarouselProps {
   cards: CreditCardData[];
@@ -44,8 +44,8 @@ export function CardCarousel({ cards, optimalCardIndex, nonOptimalReasons, onCar
         <button
           onClick={handlePrev}
           className="absolute left-2 z-30 w-8 h-8 rounded-full shadow-xl flex items-center justify-center hover:scale-110 hover:shadow-2xl transition-all duration-300"
-          style={{ 
-            backgroundColor: 'white', 
+          style={{
+            backgroundColor: 'white',
             border: `2px solid ${colors.border.default}`,
             top: 'calc(50% - 20px)',
             boxShadow: '0 8px 25px rgba(0, 0, 0, 0.15)',
@@ -58,8 +58,8 @@ export function CardCarousel({ cards, optimalCardIndex, nonOptimalReasons, onCar
         <button
           onClick={handleNext}
           className="absolute right-2 z-30 w-8 h-8 rounded-full shadow-xl flex items-center justify-center hover:scale-110 hover:shadow-2xl transition-all duration-300"
-          style={{ 
-            backgroundColor: 'white', 
+          style={{
+            backgroundColor: 'white',
             border: `2px solid ${colors.border.default}`,
             top: 'calc(50% - 20px)',
             boxShadow: '0 8px 25px rgba(0, 0, 0, 0.15)',
@@ -74,7 +74,7 @@ export function CardCarousel({ cards, optimalCardIndex, nonOptimalReasons, onCar
             {cards.map((card, index) => {
               const offset = index - currentIndex;
               const isActive = index === currentIndex;
-              
+
               // Position cards with overlap and depth
               let translateX = offset * 100;
               let translateY = Math.abs(offset) * 8; // Slight vertical offset for depth

@@ -1,17 +1,17 @@
 import { useTheme } from './ThemeContext';
 
-interface HarmonyLogoProps {
+interface CashCowLogoProps {
   className?: string;
   size?: 'small' | 'medium' | 'large';
   variant?: 'full' | 'icon-only';
 }
 
-export function HarmonyLogo({ className = "", size = 'medium', variant = 'full' }: HarmonyLogoProps) {
+export function CashCowLogo({ className = "", size = 'medium', variant = 'full' }: CashCowLogoProps) {
   const { theme } = useTheme();
-  
+
   const sizeClasses = {
     small: 'w-6 h-6',
-    medium: 'w-8 h-8', 
+    medium: 'w-8 h-8',
     large: 'w-12 h-12'
   };
 
@@ -24,16 +24,14 @@ export function HarmonyLogo({ className = "", size = 'medium', variant = 'full' 
   // Get the appropriate logo based on theme
   const getLogoImage = () => {
     if (theme === 'dark') {
-      // Use blue/dark version for dark mode (should be unnamed.jpg based on your files)
-      return "/src/assets/logos/unnamed.jpg";
+      return "/src/assets/logos/Cash Cow logo.png";
     } else {
-      // Use white background version for light mode
       return "/src/assets/logos/cash-cow-logo.png";
     }
   };
 
   const LogoIcon = () => (
-    <img 
+    <img
       src={getLogoImage()}
       alt="Cash Cow Logo"
       className={`${sizeClasses[size]} ${className}`}
@@ -48,9 +46,9 @@ export function HarmonyLogo({ className = "", size = 'medium', variant = 'full' 
   return (
     <div className={`flex items-center gap-2 ${className}`}>
       <LogoIcon />
-      <span 
+      <span
         className={`${textSizes[size]} font-semibold`}
-        style={{ 
+        style={{
           color: theme === 'dark' ? '#F7F9FB' : '#0A2540',
           fontFamily: 'Inter, system-ui, sans-serif'
         }}
@@ -64,7 +62,7 @@ export function HarmonyLogo({ className = "", size = 'medium', variant = 'full' 
 // Extension icon component for Chrome toolbar
 export function ExtensionIcon({ className = "" }: { className?: string }) {
   return (
-    <img 
+    <img
       src="/src/assets/logos/cash-cow-logo.png"
       alt="Cash Cow Extension Icon"
       className={`w-16 h-16 ${className}`}

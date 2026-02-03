@@ -1,10 +1,10 @@
 import { useState, useEffect } from "react";
-import { ThemeProvider } from "./components/ThemeContext";
+import { ThemeProvider } from "./components/ui/ThemeContext";
 import { MainPopup } from "./components/MainPopup";
-import { SettingsMenu } from "./components/SettingsMenu";
-import { ManageCards } from "./components/ManageCards";
-import { RewardPreferences } from "./components/RewardPreferences";
-import { AccountPrivacy } from "./components/AccountPrivacy";
+import { SettingsMenu } from "./components/settings/SettingsMenu";
+import { ManageCards } from "./components/settings/ManageCards";
+import { RewardPreferences } from "./components/settings/RewardPreferences";
+import { AccountPrivacy } from "./components/settings/AccountPrivacy";
 import { RewardsDashboard } from "./components/RewardsDashboard";
 
 type Screen = "main" | "settings" | "manage-cards" | "reward-preferences" | "account-privacy" | "dashboard";
@@ -26,7 +26,7 @@ export default function App() {
         if (tabs[0]) {
           const url = tabs[0].url || '';
           const hostname = new URL(url).hostname.toLowerCase().replace(/^www\./, '');
-          
+
           // Detect merchant
           const merchantMap: Record<string, string> = {
             'amazon.com': 'Amazon',
@@ -41,13 +41,13 @@ export default function App() {
           };
 
           const merchant = merchantMap[hostname] || hostname.split('.')[0];
-          
+
           // Try to get amount from storage
           const storage = await chrome.storage.local.get(['lastDetectedAmount', 'lastDetectedMerchant']);
-          const amount = storage.lastDetectedAmount 
-            ? `$${storage.lastDetectedAmount.toFixed(2)}` 
+          const amount = storage.lastDetectedAmount
+            ? `$${storage.lastDetectedAmount.toFixed(2)}`
             : 'Check page';
-          
+
           // Fallback category map (used if agent fails)
           const fallbackCategoryMap: Record<string, string> = {
             'Amazon': 'online',
@@ -60,12 +60,12 @@ export default function App() {
             'Chevron': 'gas',
             'Exxon': 'gas',
           };
-          
+
           // Use AI agent for category classification
           let category = fallbackCategoryMap[merchant] || 'general';
-          
-          console.log('🔍 Starting agent classification for:', merchant);
-          
+
+          console.log('Starting agent classification for:', merchant);
+
           try {
             const agentResponse = await fetch('http://localhost:8080/classify', {
               method: 'POST',
@@ -73,13 +73,13 @@ export default function App() {
               body: JSON.stringify({ url }),
               signal: AbortSignal.timeout(2000)
             });
-            
+
             if (agentResponse.ok) {
               const data = await agentResponse.json();
               const agentCategory = data.category.toUpperCase();
-              
-              console.log('🤖 Agent returned:', agentCategory);
-              
+
+              console.log('Agent returned:', agentCategory);
+
               // Map agent categories to extension categories
               const agentCategoryMap: Record<string, string> = {
                 'E-COMMERCE': 'online',
@@ -89,19 +89,19 @@ export default function App() {
                 'FINANCE': 'general',
                 'OTHER': 'general',
               };
-              
+
               const agentDerivedCategory = agentCategoryMap[agentCategory] || 'general';
               category = agentDerivedCategory;
-              console.log('🤖 Agent classified as:', agentCategory, '→ Extension category:', category);
+              console.log('Agent classified as:', agentCategory, '-> Extension category:', category);
             } else {
-              console.log('⚠️ Agent returned error status:', agentResponse.status);
-              console.log('📂 Using fallback category:', category);
+              console.log('Agent returned error status:', agentResponse.status);
+              console.log('Using fallback category:', category);
             }
           } catch (error) {
-            console.log('⚠️ Agent not available, using fallback category:', category, error);
+            console.log('Agent not available, using fallback category:', category, error);
           }
-          
-          console.log('✅ Final category for', merchant, ':', category);
+
+          console.log('Final category for', merchant, ':', category);
           setTabInfo({ merchantName: merchant, amount, category });
         }
       } catch (error) {
@@ -114,7 +114,7 @@ export default function App() {
 
   return (
     <ThemeProvider>
-      <div 
+      <div
         className="mx-auto overflow-hidden shadow-2xl"
         style={{
           width: '400px',

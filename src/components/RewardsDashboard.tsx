@@ -1,6 +1,6 @@
 import { ArrowLeft, TrendingUp } from "lucide-react";
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from "recharts";
-import { useDragScroll } from "./useDragScroll";
+import { useDragScroll } from "./ui/useDragScroll";
 
 interface RewardsDashboardProps {
   onNavigate: (screen: string) => void;
@@ -86,20 +86,20 @@ export function RewardsDashboard({ onNavigate }: RewardsDashboardProps) {
           <ResponsiveContainer width="100%" height={220}>
             <BarChart data={monthlyData}>
               <CartesianGrid strokeDasharray="3 3" stroke="#F3F4F6" />
-              <XAxis 
-                dataKey="name" 
+              <XAxis
+                dataKey="name"
                 axisLine={false}
                 tickLine={false}
                 style={{ fontSize: '13px', fill: '#9CA3AF' }}
               />
-              <YAxis 
+              <YAxis
                 axisLine={false}
                 tickLine={false}
                 style={{ fontSize: '13px', fill: '#9CA3AF' }}
                 domain={[0, 100]}
                 ticks={[0, 25, 50, 75, 100]}
               />
-              <Tooltip 
+              <Tooltip
                 cursor={{ fill: 'rgba(10, 37, 64, 0.05)' }}
                 contentStyle={{
                   backgroundColor: 'white',

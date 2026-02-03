@@ -28,39 +28,36 @@ export function CreditCardDisplay({ card }: { card: CreditCardData }) {
   const cardImage = getCardImage(card.name);
 
   return (
-    <div 
+    <div
       className="relative rounded-2xl min-w-[280px] h-[160px] flex flex-col justify-between overflow-hidden shadow-2xl"
-      style={{ 
+      style={{
         boxShadow: '0 20px 60px -12px rgba(0, 0, 0, 0.35), 0 10px 30px -10px rgba(0, 0, 0, 0.2)',
         borderRadius: '14px',
       }}
     >
       {/* Card Background Image */}
       {cardImage ? (
-        <img 
-          src={cardImage} 
+        <img
+          src={cardImage}
           alt={`${card.name} card`}
           className="absolute inset-0 w-full h-full object-cover rounded-lg"
         />
       ) : (
-        <div 
+        <div
           className="absolute inset-0 rounded-lg"
           style={{ background: card.color }}
         />
       )}
-      
+
       {/* Glossy overlay effect */}
-      <div 
+      <div
         className="absolute inset-0 opacity-20"
         style={{
           background: 'linear-gradient(135deg, rgba(255,255,255,0.4) 0%, rgba(255,255,255,0) 50%, rgba(255,255,255,0.1) 100%)',
         }}
       />
-      
+
       {/* Card content - removed all overlay text elements */}
     </div>
   );
 }
-
-
-

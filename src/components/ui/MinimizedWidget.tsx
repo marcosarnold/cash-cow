@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Sparkles, ChevronLeft, ChevronRight } from 'lucide-react';
-import { HarmonyLogo } from './HarmonyLogo';
+import { CashCowLogo } from './CashCowLogo';
 import { useTheme, getThemeColors } from './ThemeContext';
 
 interface MinimizedWidgetProps {
@@ -22,12 +22,12 @@ export function MinimizedWidget({ onExpand, recommendation }: MinimizedWidgetPro
 
   useEffect(() => {
     // Load saved position from storage
-    chrome.storage.local.get(['harmonyWidgetPosition', 'harmonyWidgetPinned'], (result) => {
-      if (result.harmonyWidgetPosition) {
-        setPosition(result.harmonyWidgetPosition);
+    chrome.storage.local.get(['cashcowWidgetPosition', 'cashcowWidgetPinned'], (result) => {
+      if (result.cashcowWidgetPosition) {
+        setPosition(result.cashcowWidgetPosition);
       }
-      if (result.harmonyWidgetPinned) {
-        setIsPinned(result.harmonyWidgetPinned);
+      if (result.cashcowWidgetPinned) {
+        setIsPinned(result.cashcowWidgetPinned);
       }
     });
   }, []);
@@ -35,45 +35,45 @@ export function MinimizedWidget({ onExpand, recommendation }: MinimizedWidgetPro
   const togglePin = () => {
     const newPinned = !isPinned;
     setIsPinned(newPinned);
-    chrome.storage.local.set({ harmonyWidgetPinned: newPinned });
+    chrome.storage.local.set({ cashcowWidgetPinned: newPinned });
   };
 
   const togglePosition = () => {
     const newPosition = position === 'left' ? 'right' : 'left';
     setPosition(newPosition);
-    chrome.storage.local.set({ harmonyWidgetPosition: newPosition });
+    chrome.storage.local.set({ cashcowWidgetPosition: newPosition });
   };
 
   const handleDrag = (e: React.MouseEvent) => {
     if (isPinned) return;
-    
+
     const startX = e.clientX;
-    
+
     const handleMouseMove = (moveEvent: MouseEvent) => {
       const deltaX = moveEvent.clientX - startX;
-      
+
       // Determine if should pin to left or right side
       if (Math.abs(deltaX) > 50) {
         const newPosition = deltaX > 0 ? 'right' : 'left';
         if (newPosition !== position) {
           setPosition(newPosition);
-          chrome.storage.local.set({ harmonyWidgetPosition: newPosition });
+          chrome.storage.local.set({ cashcowWidgetPosition: newPosition });
         }
       }
     };
-    
+
     const handleMouseUp = () => {
       document.removeEventListener('mousemove', handleMouseMove);
       document.removeEventListener('mouseup', handleMouseUp);
     };
-    
+
     document.addEventListener('mousemove', handleMouseMove);
     document.addEventListener('mouseup', handleMouseUp);
   };
 
   return (
     <div
-      className="harmony-minimized-widget"
+      className="cashcow-minimized-widget"
       style={{
         position: 'fixed',
         top: '50%',
@@ -86,7 +86,7 @@ export function MinimizedWidget({ onExpand, recommendation }: MinimizedWidgetPro
       onMouseDown={handleDrag}
     >
       <div
-        className="harmony-widget-container"
+        className="cashcow-widget-container"
         style={{
           background: `linear-gradient(135deg, ${colors.bg.card} 0%, ${colors.bg.elevated} 100%)`,
           borderRadius: position === 'left' ? '0 16px 16px 0' : '16px 0 0 16px',
@@ -105,7 +105,7 @@ export function MinimizedWidget({ onExpand, recommendation }: MinimizedWidgetPro
         {/* Logo */}
         <div
           onClick={onExpand}
-          className="harmony-widget-logo"
+          className="cashcow-widget-logo"
           style={{
             cursor: 'pointer',
             transition: 'transform 0.2s ease',
@@ -117,26 +117,26 @@ export function MinimizedWidget({ onExpand, recommendation }: MinimizedWidgetPro
             e.currentTarget.style.transform = 'scale(1)';
           }}
         >
-          <HarmonyLogo variant="icon-only" size="medium" />
+          <CashCowLogo variant="icon-only" size="medium" />
         </div>
 
         {/* Recommendation indicator */}
         {recommendation && (
           <div
-            className="harmony-widget-indicator"
+            className="cashcow-widget-indicator"
             style={{
               background: `linear-gradient(135deg, ${colors.accent.gold} 0%, ${colors.accent.goldDark} 100%)`,
               borderRadius: '50%',
               width: '8px',
               height: '8px',
-              animation: 'harmony-pulse 2s infinite',
+              animation: 'cashcow-pulse 2s infinite',
             }}
           />
         )}
 
         {/* Control buttons */}
         <div
-          className="harmony-widget-controls"
+          className="cashcow-widget-controls"
           style={{
             display: 'flex',
             flexDirection: 'column',
@@ -146,7 +146,7 @@ export function MinimizedWidget({ onExpand, recommendation }: MinimizedWidgetPro
         >
           <button
             onClick={togglePosition}
-            className="harmony-widget-button"
+            className="cashcow-widget-button"
             style={{
               background: 'transparent',
               border: 'none',
@@ -174,7 +174,7 @@ export function MinimizedWidget({ onExpand, recommendation }: MinimizedWidgetPro
 
           <button
             onClick={togglePin}
-            className="harmony-widget-button"
+            className="cashcow-widget-button"
             style={{
               background: isPinned ? colors.accent.gold : 'transparent',
               border: 'none',
@@ -197,11 +197,11 @@ export function MinimizedWidget({ onExpand, recommendation }: MinimizedWidgetPro
               }
             }}
           >
-            <Sparkles 
-              size={12} 
-              style={{ 
-                color: isPinned ? '#0A2540' : colors.text.secondary 
-              }} 
+            <Sparkles
+              size={12}
+              style={{
+                color: isPinned ? '#0A2540' : colors.text.secondary
+              }}
             />
           </button>
         </div>
@@ -209,7 +209,7 @@ export function MinimizedWidget({ onExpand, recommendation }: MinimizedWidgetPro
         {/* Recommendation preview */}
         {recommendation && (
           <div
-            className="harmony-widget-preview"
+            className="cashcow-widget-preview"
             style={{
               background: colors.bg.primary,
               borderRadius: '8px',
@@ -233,7 +233,7 @@ export function MinimizedWidget({ onExpand, recommendation }: MinimizedWidgetPro
 
       <style>
         {`
-          @keyframes harmony-pulse {
+          @keyframes cashcow-pulse {
             0%, 100% {
               opacity: 1;
               transform: scale(1);
@@ -243,12 +243,12 @@ export function MinimizedWidget({ onExpand, recommendation }: MinimizedWidgetPro
               transform: scale(1.2);
             }
           }
-          
-          .harmony-minimized-widget:hover .harmony-widget-container {
+
+          .cashcow-minimized-widget:hover .cashcow-widget-container {
             transform: translateX(${position === 'left' ? '4px' : '-4px'});
           }
-          
-          .harmony-widget-logo:hover {
+
+          .cashcow-widget-logo:hover {
             filter: brightness(1.1);
           }
         `}

@@ -11,12 +11,12 @@ const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
 
 export function ThemeProvider({ children }: { children: ReactNode }) {
   const [theme, setTheme] = useState<Theme>(() => {
-    const saved = localStorage.getItem("harmony-theme");
+    const saved = localStorage.getItem("cashcow-theme");
     return (saved as Theme) || "light";
   });
 
   useEffect(() => {
-    localStorage.setItem("harmony-theme", theme);
+    localStorage.setItem("cashcow-theme", theme);
     document.documentElement.setAttribute("data-theme", theme);
   }, [theme]);
 
@@ -118,4 +118,3 @@ export const themeColors = {
 export function getThemeColors(theme: Theme) {
   return themeColors[theme];
 }
-
