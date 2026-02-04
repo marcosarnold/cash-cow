@@ -35,8 +35,7 @@ The extension works like **Honey** or **Rakuten**, but instead of finding coupon
 ### Rewards Dashboard
 *Visual analytics showing your total savings and rewards earned over time*
 
-![Rewards Dashboard](<img src="src/assets/img/rewards-dashboard.png" width="600" height="400">)
-
+![Rewards Dashboard](src/assets/img/rewards-dashboard.png)
 
 
 ## How It Works
