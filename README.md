@@ -1,330 +1,199 @@
-# Cash Cow — AI-Powered Credit Card Rewards Optimizer
+# Cash Cow
 
-A Chrome extension that maximizes your credit card rewards by automatically detecting checkout pages and recommending the optimal card based on real-time AI merchant classification and transaction amount analysis.
+An **AI-powered Chrome extension** that maximizes credit card rewards by recommending the optimal card at checkout. This project explores how combining **large language models**, **web scraping**, and **browser automation** can create intelligent financial decision tools.
 
-## 🎯 Overview
+## Overview
 
-Cash Cow integrates **Fetch.AI** with **Anthropic Claude** to intelligently classify merchants and recommend the best card using real reward data scraped from **BrightData**. The extension works like Honey or Rakuten — appearing when you're at checkout to guide your payment decision with data-driven insights.
+Cash Cow analyzes checkout pages in real-time and uses **Anthropic Claude** via a **Fetch.AI agent** to classify merchants into reward categories. The extension then calculates expected value across 13+ credit cards using **real reward data scraped from BrightData**, recommending the card that maximizes points or cashback for each transaction.
 
-## ✨ Features
+The goal is to understand:
+- How LLMs can classify merchants more intelligently than rule-based systems
+- How scraped credit card data can power personalized financial recommendations
+- How Chrome extensions can integrate AI agents for real-time decision making
+- How to build privacy-first browser tools that process data locally
 
-- **AI-Powered Classification**: Uses Claude AI via Fetch.AI agent to intelligently categorize merchants
-- **Real Credit Card Data**: Loads 13+ cards with actual reward structures from BrightData
-- **Dynamic Calculations**: Calculates best card by expected value (transaction amount × reward rate)
-- **Smart Detection**: Automatically detects checkout pages and transaction amounts
-- **Badge Notifications**: Shows exclamation mark when checkout is detected
-- **Popup Recommendations**: View optimal card with detailed rationale and card carousel
-- **Real Reward Data**: Uses scraped data including annual fees, APR, cashback rates
+The extension works like **Honey** or **Rakuten**, but instead of finding coupon codes, it finds the optimal payment method based on your wallet.
 
-## 🏪 Supported Merchants
+## Features
 
-The extension works on major e-commerce and service platforms:
+- **AI-Powered Merchant Classification** – Claude AI classifies merchants into reward categories (dining, e-commerce, groceries, gas, travel, etc.)
+- **Real Credit Card Data** – Scraped reward structures from 13+ real credit cards via BrightData
+- **Smart Checkout Detection** – Automatically detects when you're at a payment page and extracts transaction amounts
+- **Expected Value Calculations** – Computes `amount × reward rate` to rank cards by potential earnings
+- **Popup Recommendations** – Shows best card with detailed rationale and interactive card carousel
+- **Badge Notifications** – Extension icon displays "!" when checkout is detected
+- **Keyboard Shortcuts** – Press `Ctrl+Shift+H` to open recommendations instantly
+- **Privacy-First Architecture** – All processing happens locally; no transaction data leaves your browser
 
-- **Amazon.com** - E-commerce/Online shopping
-- **Uber Eats** - Food delivery/Dining
-- **DoorDash** - Food delivery/Dining
-- **Grubhub** - Food delivery/Dining
-- **Costco** - Groceries/Bulk shopping
-- **Walmart** - Groceries/Retail
-- **Shell, Chevron, Exxon** - Gas stations
-- Additional merchants supported via AI classification
+## Screenshots
 
-## 🔧 How It Works
+### Extension in Action
+*Screenshot showing the extension popup with card recommendations*
 
-### Architecture Overview
+![Extension Popup](src/assets/img/card-match.png)
 
-```
-┌─────────────────┐
-│ Checkout Page   │
-│ (Amazon, etc.)  │
-└────────┬────────┘
-         │ 1. Page Load
-         ▼
-┌─────────────────────────┐
-│ Content Script          │
-│ Detects: Merchant, $    │
-└────────┬────────────────┘
-         │ 2. Checkout Detected
-         ▼
-┌─────────────────────────┐
-│ Background Worker       │
-│ Updates Badge: "!"      │
-└────────┬────────────────┘
-         │ 3. User Clicks Icon
-         ▼
-┌─────────────────────────┐
-│ Extension Popup         │
-│ Calls Agent API         │
-└────────┬────────────────┘
-         │ 4. POST /classify
-         ▼
-┌─────────────────────────┐
-│ Fetch.AI Agent          │
-│ Calls Claude AI         │
-└────────┬────────────────┘
-         │ 5. Category Response
-         ▼
-┌─────────────────────────┐
-│ Cash Cow Extension      │
-│ Calculates Best Card    │
-└────────┬────────────────┘
-         │ 6. Display Recommendation
-         ▼
-┌─────────────────────────┐
-│ User Sees:              │
-│ • Best Card             │
-│ • Expected Points        │
-│ • Rationale             │
-└─────────────────────────┘
-```
+### Rewards Dashboard
+*Visual analytics showing your total savings and rewards earned over time*
 
-### Component Breakdown
+![Rewards Dashboard](src/assets/img/rewards-dashboard.png)
 
-1. **Content Script** (`src/pages/content/amazon-amount.js`)
-   - Runs on all pages, detects checkout state
-   - Extracts merchant name and transaction amount
-   - Only activates on known merchant sites
-   - Sends `CHECKOUT_DETECTED` message
 
-2. **Background Service Worker** (`src/pages/background/index.ts`)
-   - Receives checkout detection events
-   - Updates extension badge with "!" notification
-   - Handles keyboard shortcuts (Ctrl+Shift+H)
-   - Manages Chrome runtime messaging
 
-3. **Fetch.AI Agent** (`fetchai_agent.py`)
-   - FastAPI server on localhost:8080
-   - Integrates with Anthropic Claude API
-   - Classifies merchant domains into categories:
-     - **DINING**: Restaurants, food delivery
-     - **E-COMMERCE**: Online shopping
-     - **GROCERIES**: Grocery stores
-     - **GAS**: Gas stations
-     - **TRAVEL**: Airlines, hotels, booking
-     - **ENTERTAINMENT**: Streaming, music, events
-     - **FINANCE**: Banks, payment processors
-     - **ONLINE**: Digital services, purchases
-     - **OTHER**: Everything else
+## How It Works
 
-4. **Recommendation Engine** (`src/lib/rewards/`)
-   - **Loads 13+ real credit cards** from BrightData JSON
-   - Extracts reward rates by category (dining, groceries, gas, etc.)
-   - Calculates expected value: `amount × rewardRate`
-   - Sorts cards by expected reward value (best first)
-   - Provides detailed rationale for recommendations
+**1. Content Script** (`src/pages/content/amazon-amount.js`)
+- Runs on all pages and detects checkout states
+- Extracts merchant name from URL and transaction amount from DOM
+- Only activates on known merchant sites (Amazon, Uber Eats, DoorDash, etc.)
+- Sends `CHECKOUT_DETECTED` message to background worker
 
-### BrightData Integration
+**2. Background Service Worker** (`src/pages/background/index.ts`)
+- Listens for checkout detection events
+- Updates extension badge with "!" notification
+- Handles keyboard shortcuts (`Ctrl+Shift+H`)
+- Manages Chrome runtime messaging between content scripts and popup
 
-The extension uses **scraped credit card data** from BrightData (`credit_card_rewards.json`):
+**3. Agent Server** (`server/agent.py`)
+- FastAPI server running on `localhost:8080`
+- Integrates with Anthropic Claude API for merchant classification
+- Classifies merchant domains into reward categories:
+  - **DINING** – Restaurants, food delivery (Uber Eats, DoorDash)
+  - **E-COMMERCE** – Online shopping (Amazon, eBay)
+  - **GROCERIES** – Grocery stores (Walmart, Costco)
+  - **GAS** – Gas stations (Shell, Chevron, Exxon)
+  - **TRAVEL** – Airlines, hotels, booking sites
+  - **ENTERTAINMENT** – Streaming, music, events
+  - **FINANCE** – Banks, payment processors
+  - **ONLINE** – Digital services and purchases
+  - **OTHER** – Miscellaneous merchants
 
-- **13+ Real Credit Cards** including:
-  - Capital One Savor Student
-  - U.S. Bank Shield Visa
-  - Capital One Venture Rewards
-  - And 10+ more cards
+**4. Recommendation Engine** (`src/lib/rewards/`)
+- Loads 13+ real credit cards from BrightData JSON file
+- Extracts reward rates by category (e.g., 3% on dining, 2% on groceries)
+- Calculates expected value: `transaction_amount × category_reward_rate`
+- Sorts cards by expected reward value (highest first)
+- Provides detailed rationale for each recommendation
 
-- **Real Reward Structures**:
-  - Cashback percentages by category
-  - Annual fees
-  - APR rates
-  - Sign-up bonuses
-  - Key benefits
+**5. Web Scraper** (`server/scraper.py`)
+- Scrapes credit card reward data from financial websites
+- Extracts card names, issuers, reward rates, annual fees, and benefits
+- Outputs structured JSON for the recommendation engine
 
-- **Data Processing** (`src/lib/rewards/cardDataService.ts`):
-  - Converts JSON to internal Card format
-  - Extracts category multipliers (dining: 3%, groceries: 3%, etc.)
-  - Parses base rates and rewards programs
-  - Maps cards to networks (Visa, Amex, etc.)
-
-## 🚀 Setup & Installation
+## Setup
 
 ### Prerequisites
 
-- Node.js 18+
-- Python 3.10+ with pydantic v1
-- Chrome browser
-- Anthropic Claude API key
-- BrightData API key (for data scraping)
+- **Node.js 18+**
+- **Python 3.10+** with `pydantic v1`
+- **Chrome browser**
+- **Anthropic Claude API key**
+- **BrightData API key** (for scraping credit card data)
 
 ### Installation
 
-1. **Clone the repository**
-   ```bash
-   git clone https://github.com/yourusername/cash-cow-extension.git
-   cd cash-cow-extension
-   ```
+1. Clone the repository:
+```bash
+git clone https://github.com/marcosarnold/cash-cow.git
+cd cash-cow
+```
 
-2. **Install dependencies**
-   ```bash
-   npm install
-   pip install fastapi anthropic python-dotenv uvicorn "pydantic<2.0" "anthropic<0.30"
-   ```
+2. Install dependencies:
+```bash
+npm install
+cd server
+pip install -r requirements.txt
+cd ..
+```
 
-3. **Configure API keys**
-   Create a `.env` file in the root directory:
-   ```
-   ANTHROPIC_API_KEY=your-anthropic-api-key-here
-   BRIGHTDATA_API_KEY=your-brightdata-api-key-here
-   ```
+3. Configure API keys:
 
-4. **Start the Fetch.AI agent**
-   ```bash
-   python fetchai_agent.py
-   ```
-   Server runs on `http://localhost:8080`
+Create a `.env` file in the `server/` directory:
+```
+ANTHROPIC_API_KEY=your-anthropic-api-key-here
+BRIGHTDATA_API_KEY=your-brightdata-api-key-here
+```
 
-5. **Build the extension**
-   ```bash
-   npm run build:all
-   ```
+4. Start the agent server:
+```bash
+cd server
+python agent.py
+```
 
-6. **Load in Chrome**
-   - Open `chrome://extensions/`
-   - Enable "Developer mode"
-   - Click "Load unpacked"
+The server will run on `http://localhost:8080`
+
+5. Build the extension:
+```bash
+npm run build
+```
+
+6. Load in Chrome:
+   - Navigate to `chrome://extensions/`
+   - Enable **"Developer mode"** (top right)
+   - Click **"Load unpacked"**
    - Select the `dist` folder
 
-## 💳 Example Workflow
+## Running the Extension
 
-1. **User visits Amazon checkout** for $100 purchase
-2. Extension detects checkout and extracts merchant + amount
-3. Popup calls Fetch.AI agent with URL
-4. Agent calls Claude API and classifies as **"E-COMMERCE"**
-5. Extension calculates:
-   - Chase Sapphire Preferred: $100 × 3% = **300 points** ✅ BEST
-   - Amex Gold: $100 × 1% = **100 points**
-   - Discover It: $100 × 1% = **100 points**
-6. Extension displays: "Chase Sapphire Preferred - 3× points on E-COMMERCE"
-
-## 📊 Data Sources
-
-- **BrightData**: Scraped credit card reward data (13+ cards with real rates)
-- **Anthropic Claude**: AI-powered merchant classification
-- **Fetch.AI**: Agent framework for intelligent routing
-
-## 📦 Project Structure
-
-```
-cash-cow-extension/
-├── src/
-│   ├── components/
-│   │   ├── CardCarousel.tsx           # Card carousel display
-│   │   ├── CreditCardDisplay.tsx     # Individual card UI
-│   │   ├── HarmonyLogo.tsx           # Cash Cow branding
-│   │   └── MainPopup.tsx             # Recommendation interface
-│   ├── lib/
-│   │   ├── credit_card_rewards.json  # BrightData scraped data
-│   │   ├── rewards/
-│   │   │   ├── cardDataService.ts    # BrightData data loader
-│   │   │   ├── engine.ts             # Reward calculation logic
-│   │   │   └── rules.ts              # Card definitions
-│   │   └── types.ts                  # TypeScript definitions
-│   ├── pages/
-│   │   ├── background/
-│   │   │   └── index.ts              # Service worker
-│   │   ├── content/
-│   │   │   ├── amazon-amount.js     # Checkout detection
-│   │   │   ├── index.tsx            # Content overlay
-│   │   │   └── merchant/detect.ts   # Merchant logic
-│   │   └── popup/
-│   │       └── index.html           # Popup UI
-│   └── assets/
-│       └── logos/
-│           └── cash-cow-logo.png    # Branding
-├── fetchai_agent.py                  # Fetch.AI + Claude server
-├── start_agent.ps1                   # Agent startup script
-├── manifest.json                     # Chrome manifest
-└── package.json                      # Dependencies
-```
-
-## 🔑 Key Technologies
-
-- **Frontend**: React + TypeScript + Tailwind CSS
-- **Build**: Vite
-- **AI Agent**: Fetch.AI framework
-- **AI Model**: Anthropic Claude (via agent)
-- **Data Source**: BrightData (credit card rewards)
-- **Backend**: FastAPI (Python)
-- **Storage**: Chrome Storage API
-
-## 🧪 Testing
-
-1. Start the agent:
-   ```bash
-   python fetchai_agent.py
-   ```
-
-2. Load extension in Chrome
-
-3. Visit a merchant (e.g., Amazon.com)
-
-4. Add to cart and go to checkout
-
-5. Click the Cash Cow extension icon (or press Ctrl+Shift+H)
-
-6. Verify recommendation shows best card for that merchant category
-
-## 💰 How Recommendations Work
-
-The extension calculates the optimal card using this formula:
-
-```
-Expected Value = Transaction Amount × Category Reward Rate
-```
-
-**Example:**
-- Purchase: $100 at Amazon (E-COMMERCE category)
-- Chase Sapphire Preferred: $100 × 3% = **300 points**
-- Amex Gold: $100 × 1% = **100 points**
-- **Recommended: Chase Sapphire Preferred**
-
-The card with the highest expected value is displayed first, with all cards sorted by potential rewards.
-
-## 📝 Development
-
-### Build Commands
-
+1. **Start the agent server:**
 ```bash
-# Development
-npm run dev
-
-# Production build
-npm run build:all
-
-# Content script only
-npm run build:content
+cd server
+python agent.py
 ```
 
-### Data Updates
+2. **Visit a supported merchant** (e.g., Amazon, Uber Eats, DoorDash)
 
-Credit card data is loaded from `src/lib/credit_card_rewards.json`, which contains scraped data from BrightData including:
+3. **Add items to cart** and proceed to checkout
 
-- Card names and issuers
-- Reward rates by category
-- Annual fees
-- APR information
-- Sign-up bonuses
-- Key benefits
+4. **Open the extension:**
+   - Click the Cash Cow icon in your toolbar, OR
+   - Press `Ctrl+Shift+H`
 
-To update card data, re-run the BrightData scraper.
+5. **View recommendations** showing:
+   - Best card for the current merchant
+   - Expected rewards/cashback
+   - All cards ranked by value
+   - Detailed rationale for the recommendation
 
-## ⚠️ Important Notes
+## Supported Merchants
 
-- Requires Fetch.AI agent server running on `localhost:8080`
-- Uses real scraped credit card data from BrightData
-- AI classification powered by Anthropic Claude
-- Only activates on known merchant sites
-- No real banking integrations (mock data for demo)
+The extension currently supports major e-commerce and service platforms:
 
-## 🤝 Contributing
+- **E-commerce**: Amazon.com
+- **Food Delivery**: Uber Eats, DoorDash, Grubhub
+- **Groceries**: Costco, Walmart
+- **Gas Stations**: Shell, Chevron, Exxon
+- **Travel**: Airlines, booking sites (via AI classification)
+- **Streaming**: Netflix, Spotify (via AI classification)
 
-This is a Chrome MV3 extension built with:
-- Minimal permissions
-- Client-first architecture
-- Real data from BrightData
-- AI-powered merchant classification
-- TypeScript strict mode
+Additional merchants are supported through Claude AI's intelligent classification system.
 
-## 📄 License
+## Technologies Used
+
+- **React + TypeScript** – Modern UI framework with type safety
+- **Tailwind CSS** – Utility-first styling
+- **Vite** – Fast build tool for Chrome MV3 extensions
+- **Anthropic Claude** – LLM for intelligent merchant classification
+- **FastAPI** – Python web framework for the agent server
+- **BrightData** – Web scraping platform for credit card reward data
+- **Chrome Extensions API** – Manifest V3 for modern browser extensions
+
+## Limitations & Future Work
+
+**Current Limitations:**
+- Requires local agent server running on `localhost:8080`
+- Only supports pre-defined merchant sites (extensible via AI)
+- Uses mock card data (real scraping requires BrightData subscription)
+- No real banking integrations (privacy-first design)
+- Desktop Chrome only (no mobile support yet)
+
+**Potential Improvements:**
+- Hosted agent server for easier deployment
+- Mobile Chrome support via React Native
+- Integration with Plaid for real card balances
+- Support for loyalty programs and transfer partners
+- Historical spending analysis for personalized recommendations
+- Support for debit cards and digital wallets
+
+## License
 
 MIT License
